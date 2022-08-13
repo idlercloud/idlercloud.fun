@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>WordPress - 标签 - 主页</title>
-    <link>http://blog.cxz888.xyz/tags/wordpress/</link>
+    <link>http://cxz888.xyz/tags/wordpress/</link>
     <description>WordPress - 标签 - 主页</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 11:21:45 &#43;0800</lastBuildDate><atom:link href="http://blog.cxz888.xyz/tags/wordpress/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 11:21:45 &#43;0800</lastBuildDate><atom:link href="http://cxz888.xyz/tags/wordpress/" rel="self" type="application/rss+xml" /><item>
   <title>「个人博客建站笔记」2.网站的布局</title>
-  <link>http://blog.cxz888.xyz/posts/tech/blog_site_note_2/</link>
+  <link>http://cxz888.xyz/posts/tech/blog_site_note_2/</link>
   <pubDate>Thu, 11 Aug 2022 11:21:45 &#43;0800</pubDate>
   <author>cxz888</author>
-  <guid>http://blog.cxz888.xyz/posts/tech/blog_site_note_2/</guid>
+  <guid>http://cxz888.xyz/posts/tech/blog_site_note_2/</guid>
   <description><![CDATA[<p>本文讲述<strong>如何优化 WordPress 网站的界面布局</strong>。</p>
 <ul>
 <li>涉及内容：网站后台、主题、PHP、HTML、CSS。</li>
@@ -262,10 +262,10 @@
 </blockquote>]]></description>
 </item><item>
   <title>「个人博客建站笔记」1.网站建成</title>
-  <link>http://blog.cxz888.xyz/posts/tech/blog_site_note_1/</link>
+  <link>http://cxz888.xyz/posts/tech/blog_site_note_1/</link>
   <pubDate>Wed, 10 Aug 2022 18:41:49 &#43;0800</pubDate>
   <author>cxz888</author>
-  <guid>http://blog.cxz888.xyz/posts/tech/blog_site_note_1/</guid>
+  <guid>http://cxz888.xyz/posts/tech/blog_site_note_1/</guid>
   <description><![CDATA[<p>这是我在以前博客的第一篇文章，主要记述的是使用 WordPress 和宝塔 Linux 面板，从零开始搭建一个基础博客网站的过程。</p>
 <ul>
 <li>涉及内容：服务器、域名、域名解析、宝塔 Linux 面板、wordpress 的使用。</li>

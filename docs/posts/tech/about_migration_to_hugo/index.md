@@ -123,11 +123,17 @@ Hugo 不太方便的一点是，本地写作之后生成站点，需要手动同
 
 （不过刚好服务器快过期了，也许我会试着迁移到 Github Pages 上试试。)
 
+8/13 更新说明：
+
+-   花了一早上成功迁移到 Github Pages 上了，同样的写完 push 即可。
+-   服务器拜拜咯，等我有钱了再考虑您呐。
+-   现在的目标是有朝一日写出对得起自己部署网站花费的时间的文章了。
+
 ![喝茶看报猫猫](/memes/tea-newspaper-cat.jpg)
 
 
 ---
 
 > 作者: <no value>  
-> URL: http://blog.cxz888.xyz/posts/tech/about_migration_to_hugo/  
+> URL: http://cxz888.xyz/posts/tech/about_migration_to_hugo/  
 

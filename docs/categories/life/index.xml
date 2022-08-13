@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>生活 - 分类 - 主页</title>
-    <link>http://blog.cxz888.xyz/categories/life/</link>
+    <link>http://cxz888.xyz/categories/life/</link>
     <description>生活 - 分类 - 主页</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 21:48:06 &#43;0800</lastBuildDate><atom:link href="http://blog.cxz888.xyz/categories/life/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><atom:link href="http://cxz888.xyz/categories/life/" rel="self" type="application/rss+xml" /><item>
   <title> 数电实验验收，关于内卷</title>
-  <link>http://blog.cxz888.xyz/posts/life/thought_about_involution/</link>
+  <link>http://cxz888.xyz/posts/life/thought_about_involution/</link>
   <pubDate>Thu, 11 Aug 2022 21:48:06 &#43;0800</pubDate>
   <author>cxz888</author>
-  <guid>http://blog.cxz888.xyz/posts/life/thought_about_involution/</guid>
+  <guid>http://cxz888.xyz/posts/life/thought_about_involution/</guid>
   <description><![CDATA[<p>今天 (2022/5/15) 验收数电的实验。</p>
 <p>各路神仙大战。</p>
 <p>太可怕了。</p>

@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "style.min.css",
-	"sourceRoot": "D:/Idler/Others_I/cxz888.xyz",
+	"sourceRoot": "D:/Idler/Others_I/website/cxz888.xyz",
 	"sources": [
 		"themes/FixIt/assets/css/style.scss",
 		"themes/FixIt/assets/css/_variables.scss",

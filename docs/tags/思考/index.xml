@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>思考 - 标签 - 主页</title>
-    <link>http://blog.cxz888.xyz/tags/%E6%80%9D%E8%80%83/</link>
+    <link>http://cxz888.xyz/tags/%E6%80%9D%E8%80%83/</link>
     <description>思考 - 标签 - 主页</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 12 Aug 2022 22:40:19 &#43;0800</lastBuildDate><atom:link href="http://blog.cxz888.xyz/tags/%E6%80%9D%E8%80%83/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Fri, 12 Aug 2022 22:40:19 &#43;0800</lastBuildDate><atom:link href="http://cxz888.xyz/tags/%E6%80%9D%E8%80%83/" rel="self" type="application/rss+xml" /><item>
   <title>迁移说明</title>
-  <link>http://blog.cxz888.xyz/posts/tech/about_migration_to_hugo/</link>
+  <link>http://cxz888.xyz/posts/tech/about_migration_to_hugo/</link>
   <pubDate>Fri, 12 Aug 2022 22:40:19 &#43;0800</pubDate>
   <author>cxz888</author>
-  <guid>http://blog.cxz888.xyz/posts/tech/about_migration_to_hugo/</guid>
+  <guid>http://cxz888.xyz/posts/tech/about_migration_to_hugo/</guid>
   <description><![CDATA[<p>最近花了一些时间把博客从 WordPress 迁移到了 Hugo 上。</p>
 <p>来简单谈谈我的选择吧，夹杂一些胡思乱想，和技术上的关系不是很大。</p>
 <p>大概是今年 2 月多吧，在大佬的指引下建立了自己的博客。</p>
@@ -75,13 +75,19 @@
 <p>越简单的人生，具有越强大的免疫力以抵挡外界。</p>
 <p>希望能一直简单下去，提高自我，有朝一日写出对得起服务器价格的文章吧。</p>
 <p>（不过刚好服务器快过期了，也许我会试着迁移到 Github Pages 上试试。)</p>
+<p>8/13 更新说明：</p>
+<ul>
+<li>花了一早上成功迁移到 Github Pages 上了，同样的写完 push 即可。</li>
+<li>服务器拜拜咯，等我有钱了再考虑您呐。</li>
+<li>现在的目标是有朝一日写出对得起自己部署网站花费的时间的文章了。</li>
+</ul>
 <p></p>]]></description>
 </item><item>
   <title> 数电实验验收，关于内卷</title>
-  <link>http://blog.cxz888.xyz/posts/life/thought_about_involution/</link>
+  <link>http://cxz888.xyz/posts/life/thought_about_involution/</link>
   <pubDate>Thu, 11 Aug 2022 21:48:06 &#43;0800</pubDate>
   <author>cxz888</author>
-  <guid>http://blog.cxz888.xyz/posts/life/thought_about_involution/</guid>
+  <guid>http://cxz888.xyz/posts/life/thought_about_involution/</guid>
   <description><![CDATA[<p>今天 (2022/5/15) 验收数电的实验。</p>
 <p>各路神仙大战。</p>
 <p>太可怕了。</p>

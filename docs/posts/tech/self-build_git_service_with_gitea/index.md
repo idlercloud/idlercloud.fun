@@ -162,5 +162,5 @@ DNS 解析对端口是一无所知的，所以现在得通过 `repo.cxz888.xyz:�
 ---
 
 > 作者: <no value>  
-> URL: http://blog.cxz888.xyz/posts/tech/self-build_git_service_with_gitea/  
+> URL: http://cxz888.xyz/posts/tech/self-build_git_service_with_gitea/  
 

@@ -233,5 +233,5 @@ function auto_redirect_after_logout(){
 ---
 
 > 作者: <no value>  
-> URL: http://blog.cxz888.xyz/posts/tech/blog_site_note_2/  
+> URL: http://cxz888.xyz/posts/tech/blog_site_note_2/  
 

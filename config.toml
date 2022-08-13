@@ -1,4 +1,4 @@
-baseURL = "http://blog.cxz888.xyz"
+baseURL = "http://cxz888.xyz"
 # [en, zh-cn, fr, ...] 设置默认的语言
 defaultContentLanguage = "zh-cn"
 # 网站语言，仅在这里 CN 大写
@@ -9,6 +9,7 @@ hasCJKLanguage = true
 title = "主页"
 timeZone = "Asia/Shanghai"
 publishDir = "docs"
+enableGitInfo = true
 
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "FixIt"
@@ -126,6 +127,9 @@ noClasses = false
 [markup.goldmark.renderer]
 # 允许在 md 中内嵌 html
 unsafe = true
+
+[frontmatter]
+lastmod = [':git', 'lastmod', ':fileModTime', ':default']
 
 [outputs]
 home = ["HTML", "RSS", "JSON"]

@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>Linux - 标签 - 主页</title>
-    <link>http://blog.cxz888.xyz/tags/linux/</link>
+    <link>http://cxz888.xyz/tags/linux/</link>
     <description>Linux - 标签 - 主页</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 22:09:03 &#43;0800</lastBuildDate><atom:link href="http://blog.cxz888.xyz/tags/linux/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 22:09:03 &#43;0800</lastBuildDate><atom:link href="http://cxz888.xyz/tags/linux/" rel="self" type="application/rss+xml" /><item>
   <title>Linux 通过 gogs 或 gitea 自建 Git 服务</title>
-  <link>http://blog.cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</link>
+  <link>http://cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</link>
   <pubDate>Thu, 11 Aug 2022 22:09:03 &#43;0800</pubDate>
   <author>cxz888</author>
-  <guid>http://blog.cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</guid>
+  <guid>http://cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</guid>
   <description><![CDATA[<p>之前写课设时因为需要合作，于是在服务器上搭建了一个临时、简陋的 git 服务。</p>
 <p>没有 web 界面，纯命令行交互，添加密钥都要手动 ssh 到服务器。</p>
 <p>这次就尝试用开源应用搭建一个功能完善、使用方便、颜值能打的 git 服务。</p>
@@ -221,20 +221,20 @@
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="http://blog.cxz888.xyz/posts/tech/self-build_git_service_with_gitea/"
+  href="http://cxz888.xyz/posts/tech/self-build_git_service_with_gitea/"
   
   
   
   
   
->http://blog.cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</a></p>
+>http://cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</a></p>
 </blockquote>]]></description>
 </item><item>
   <title>使用 WSL2 时碰到的小问题</title>
-  <link>http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</link>
+  <link>http://cxz888.xyz/posts/tech/wsl_rust_tips/</link>
   <pubDate>Thu, 11 Aug 2022 21:02:21 &#43;0800</pubDate>
   <author>cxz888</author>
-  <guid>http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</guid>
+  <guid>http://cxz888.xyz/posts/tech/wsl_rust_tips/</guid>
   <description><![CDATA[<p>写这篇博客时，我因为 CS110L 的作业要求必须安装 Linux 环境。几番周折最后选择了 Windows 下的 WSL2。现在看来很不错。</p>
 <p>过程中也遇到一些小坑：</p>
 <ol>
@@ -432,13 +432,13 @@
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/"
+  href="http://cxz888.xyz/posts/tech/wsl_rust_tips/"
   
   
   
   
   
->http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</a></p>
+>http://cxz888.xyz/posts/tech/wsl_rust_tips/</a></p>
 </blockquote>]]></description>
 </item></channel>
 </rss>

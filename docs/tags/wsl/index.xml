@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>WSL - 标签 - 主页</title>
-    <link>http://blog.cxz888.xyz/tags/wsl/</link>
+    <link>http://cxz888.xyz/tags/wsl/</link>
     <description>WSL - 标签 - 主页</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 21:02:21 &#43;0800</lastBuildDate><atom:link href="http://blog.cxz888.xyz/tags/wsl/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 21:02:21 &#43;0800</lastBuildDate><atom:link href="http://cxz888.xyz/tags/wsl/" rel="self" type="application/rss+xml" /><item>
   <title>使用 WSL2 时碰到的小问题</title>
-  <link>http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</link>
+  <link>http://cxz888.xyz/posts/tech/wsl_rust_tips/</link>
   <pubDate>Thu, 11 Aug 2022 21:02:21 &#43;0800</pubDate>
   <author>cxz888</author>
-  <guid>http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</guid>
+  <guid>http://cxz888.xyz/posts/tech/wsl_rust_tips/</guid>
   <description><![CDATA[<p>写这篇博客时，我因为 CS110L 的作业要求必须安装 Linux 环境。几番周折最后选择了 Windows 下的 WSL2。现在看来很不错。</p>
 <p>过程中也遇到一些小坑：</p>
 <ol>
@@ -206,13 +206,13 @@
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/"
+  href="http://cxz888.xyz/posts/tech/wsl_rust_tips/"
   
   
   
   
   
->http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</a></p>
+>http://cxz888.xyz/posts/tech/wsl_rust_tips/</a></p>
 </blockquote>]]></description>
 </item></channel>
 </rss>

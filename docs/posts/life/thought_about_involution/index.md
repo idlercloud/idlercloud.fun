@@ -133,5 +133,5 @@
 ---
 
 > 作者: <no value>  
-> URL: http://blog.cxz888.xyz/posts/life/thought_about_involution/  
+> URL: http://cxz888.xyz/posts/life/thought_about_involution/  
 

@@ -192,5 +192,5 @@ Windows 下需要用到一个叫做 PuTTY 的软件。这是[官网下载地址]
 ---
 
 > 作者: <no value>  
-> URL: http://blog.cxz888.xyz/posts/tech/blog_site_note_1/  
+> URL: http://cxz888.xyz/posts/tech/blog_site_note_1/  
 

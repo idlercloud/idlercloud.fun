@@ -34,5 +34,5 @@
 ---
 
 > 作者: <no value>  
-> URL: http://blog.cxz888.xyz/about/  
+> URL: http://cxz888.xyz/about/  
 

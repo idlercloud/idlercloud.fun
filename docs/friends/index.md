@@ -7,5 +7,5 @@
 ---
 
 > 作者: <no value>  
-> URL: http://blog.cxz888.xyz/friends/  
+> URL: http://cxz888.xyz/friends/  
 

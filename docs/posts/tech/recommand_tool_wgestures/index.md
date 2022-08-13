@@ -72,5 +72,5 @@ WGestures 支持 Windows7+。它有一个升级的界面更优美、功能更丰
 ---
 
 > 作者: <no value>  
-> URL: http://blog.cxz888.xyz/posts/tech/recommand_tool_wgestures/  
+> URL: http://cxz888.xyz/posts/tech/recommand_tool_wgestures/  
 
