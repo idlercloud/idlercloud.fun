@@ -1,45 +1,5 @@
----
-title: "迁移说明"
-subtitle: ""
-date: 2022-08-12T22:40:19+08:00
-draft: false
-author: "cxz888"
-authorLink: "https://cxz888.xyz"
-authorEmail: "idlercloud@gmail.com"
-description: ""
-keywords: ""
-license: '<a rel="license" href="http://creativecommons.org/licenses/by/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a>'
-comment: false
-weight: 0
+# 迁移说明
 
-tags:
-    - 思考
-categories:
-    - tech
-
-hiddenFromHomePage: false
-hiddenFromSearch: false
-
-summary: ""
-resources:
-    - name: featured-image
-      src: featured-image.jpg
-    - name: featured-image-preview
-      src: featured-image-preview.jpg
-
-toc:
-    enable: true
-math:
-    enable: false
-lightgallery: false
-seo:
-    images: []
-
-repost:
-    enable: false
-    url: ""
-# See details front matter: /theme-documentation-content/#front-matter
----
 
 最近花了一些时间把博客从 WordPress 迁移到了 Hugo 上。
 
@@ -164,3 +124,10 @@ Hugo 不太方便的一点是，本地写作之后生成站点，需要手动同
 （不过刚好服务器快过期了，也许我会试着迁移到 Github Pages 上试试。)
 
 ![喝茶看报猫猫](/memes/tea-newspaper-cat.jpg)
+
+
+---
+
+> 作者: <no value>  
+> URL: http://blog.cxz888.xyz/posts/tech/about_migration_to_hugo/  
+
