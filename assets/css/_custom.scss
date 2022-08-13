@@ -1,0 +1,85 @@
+.friend-url {
+    text-decoration: none !important;
+}
+.friend-avatar {
+    width: 56px !important;
+    height: 56px !important;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+    padding: 2px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+    margin-top: 14px !important;
+    margin-left: 14px !important;
+    background-color: #fff;
+}
+
+.friend-div {
+    height: 92px;
+    margin-top: 10px;
+    width: calc(50% - 12px);
+    display: inline-block !important;
+    border-radius: 5px;
+    background: #91919126;
+    box-shadow: 4px 4px 2px 1px #88838310;
+}
+
+.friend-div:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.friend-div-left {
+    width: 92px;
+    float: left;
+}
+
+.friend-div-left {
+    margin-right: 2px;
+}
+
+.friend-div-right {
+    margin-top: 18px;
+    margin-right: 18px;
+}
+
+.friend-name {
+    text-align: center;
+    font-size: 20px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.friend-name {
+    color: #161616 !important;
+    font-weight: bold;
+}
+
+[theme="dark"] .friend-name {
+    color: #b1b1b1 !important;
+}
+
+.friend-info {
+    text-align: center;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.friend-info {
+    color: #161616e4 !important;
+}
+
+[theme="dark"] .friend-info {
+    color: #b1b1b1b1 !important;
+}
+
+div.content a:not(.header-mark) {
+    color: #060209 !important;
+    text-decoration: underline !important;
+}
+
+[theme="dark"] div.content a:not(.header-mark) {
+    color: #c1c1c1 !important;
+    text-decoration: underline !important;
+}

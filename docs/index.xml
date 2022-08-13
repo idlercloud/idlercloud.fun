@@ -1,0 +1,1245 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>主页</title>
+    <link>http://blog.cxz888.xyz/</link>
+    <description>This is My New Hugo Site</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 22:09:03 &#43;0800</lastBuildDate>
+      <atom:link href="http://blog.cxz888.xyz/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+  <title>Linux 通过 gogs 或 gitea 自建 Git 服务</title>
+  <link>http://blog.cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</link>
+  <pubDate>Thu, 11 Aug 2022 22:09:03 &#43;0800</pubDate>
+  <author>cxz888</author>
+  <guid>http://blog.cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</guid>
+  <description><![CDATA[<p>之前写课设时因为需要合作，于是在服务器上搭建了一个临时、简陋的 git 服务。</p>
+<p>没有 web 界面，纯命令行交互，添加密钥都要手动 ssh 到服务器。</p>
+<p>这次就尝试用开源应用搭建一个功能完善、使用方便、颜值能打的 git 服务。</p>
+<h2 id="gogs">gogs</h2>
+<p><a
+  href="https://gogs.io/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>官网地址</a></p>
+<p>国人大佬维护的、以 Golang 开发、支持 Linux、macOS、Windows 和基于 ARM 的操作系统的易用 Git 服务。</p>
+<p>它的优点是所需性能极低，甚至可以在树莓派上运行起来；使用极其简单，只需几步设置。</p>
+<p>预览（图片来自官网）</p>
+<p></p>
+<h3 id="通过-docker-使用">通过 Docker 使用</h3>
+<p>这里假设你已经安装好 docker，并且懂得基本的使用。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 拉取官方镜像</span>
+</span></span><span class="line"><span class="cl">docker pull gogs/gogs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 本地创建存放数据的目录</span>
+</span></span><span class="line"><span class="cl">mkdir -p /var/gogs
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 运行镜像</span>
+</span></span><span class="line"><span class="cl">docker run --name<span class="o">=</span>gogs -p 10022:22 -p 10880:3000 -v /var/gogs:/data gogs/gogs
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>docker run</code> 中的两个 <code>-p</code> 分别代表着 ssh 服务和主服务，将容器内的 22 号端口和 3000 号端口分别映射到外界的 10022 和 10880 端口。</p>
+<p>注意，如果你看了一些过期的教程，它们可能让你将 3000 映射到 10080。从前这是可以的，但是某个版本之后，Chrome 因为安全原因禁止了 10080 端口的访问（Edge 和 Firefox 应该也是）。如果你用 10080，可能就会看到 <code>error: kex_exchange_identification: client sent invalid protocol identifier</code> 的错误提示。</p>
+<p>如果一切顺利，现在就可以通过 <code>服务器 IP:10880</code> 在浏览器中看到安装界面了。如下：</p>
+<p></p>
+<p>数据库可以选 MySQL、PostgreSQL 或 SQLite3。注意如果用 MySQL 需要 5.7 及以上版本。实际上大部分情况 SQLite3 就够用了。</p>
+<p>然后是下面的应用基本设置。</p>
+<p>一般情况下其它不动，尤其是运行系统用户，似乎必须写 git，因为 docker 的运行脚本里面好像硬编码了 RUN_USER 为 git。</p>
+<p>下图红框框选出的三个最好自己决定。应用名称我不知道会影响什么，但域名和应用 url，正如图中提示所言，会影响 clone 的地址。</p>
+<p></p>
+<p>如果不加修改，最后仓库的 clone 地址就会类似这样：</p>
+<p>
+</p>
+<p>下面还有可选设置，如邮件服务器、禁止用户注册等等，不一一介绍。</p>
+<p>现在，点击“立即安装”即可。</p>
+<p>如果没有在可选设置里面注册管理员帐号，那么默认第一个注册的用户即是管理员。</p>
+<p>gogs 的一些设置可以在 <code>数据目录/gogs/conf/app.ini</code> 修改，如：</p>
+<p><figure><a class="lightgallery" href="/images/gogs_settings.png" title="gogs 设置" data-thumbnail="/images/gogs_settings.png" data-sub-html="<h2>app.ini 位置</h2><p>gogs 设置</p>">
+    
+  </a><figcaption class="image-caption">app.ini 位置</figcaption>
+  </figure></p>
+<p>设置的名称和格式都比较清楚，如有疑问可以查看<a
+  href="https://github.com/gogs/gogs/blob/main/conf/app.ini"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>仓库里的 <code>app.ini</code></a>。这是内嵌到二进制分发中的默认设置，其中有每个选项的英文介绍。</p>
+<h3 id="二进制安装">二进制安装</h3>
+<p>和 Docker 大同小异。这里参考一下<a
+  href="https://gogs.io/docs/installation/install_from_binary"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>官方文档</a>。</p>
+<p>根据自己的版本下载二进制文件，上传到服务器。比如我放在了网站目录，实际上随便放个地方都行。</p>
+<p>然后这里有个需要注意的点，平时我们 ssh 到服务器可能一直都是用的 root 用户。</p>
+<p>而如果你运行 <code>./gogs web</code> 时用的是 root 用户，应用设置里填的运行系统用户却是 git。那么最后就会报错 <code>运行系统用户非当前用户:git -&gt; root</code>。</p>
+<p>实际上 git 服务也完全不需要 root 用户，我们应该切换到普通用户。</p>
+<p>最好是用 git 这个用户名，这样最后 ssh 的 clone 地址就是 <code>git@xxxx</code>。不过如果你已经安装过 git，那么 git 这个用户可能已经被注册了，而且如果用 <code>su git</code> 切换到这个用户后似乎无法正常使用命令。</p>
+<p>git 这个用户不行的话，就用 <code>sudo adduser</code> 另外创建用户，比如 <code>sudo adduser gogs</code>。按照指示完成创建，最后用 <code>su gogs</code> 切换过去即可。</p>
+<p>cd 到二进制文件所在的目录，如果直接执行 <code>./gogs web</code> 可能显示权限不足，那么就先 <code>chmod +x gogs</code>。如果是用 SQLite3 的话，为了后续能创建数据库，这里还要进行一下 <code>chown gogs:gogs /www/wwwroot/repo.cxz888.xyz</code> 把目录的权限赋予给当前用户。</p>
+<p>剩下的就和 docker 差不多了，不过最后 ssh clone 地址是 <code>gogs@xxxx</code>。</p>
+<p>可能遇到的情况是，gogs 默认情况下使用的是 3000 端口。如果你的 3000 端口已经被占用，那可能就需要一些修改。</p>
+<p>按照官方所说，你不应该修改源代码中的 <code>app.ini</code>，而是应该在二进制文件所在目录下新建 <code>custom/conf/app.ini</code>。（docker 方式安装无需担心这点）</p>
+<p>你可以添加如下内容修改端口：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">[server]
+</span></span><span class="line"><span class="cl">HTTP_PORT        = 10880
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="gitea">gitea</h2>
+<p><a
+  href="https://github.com/go-gitea/gitea"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>官网地址</a></p>
+<p>gitea 是 2016 年的时候从 gogs 项目中 fork 出来的。</p>
+<p>似乎是策略不同，gitea 明显活跃程度更高一些，无论是 issue、PR 还是 commit 都远超 gogs。</p>
+<p>我个人也觉得文档、功能、提示方面 gitea 做得更好。（仅个人感受，无意冒犯）</p>
+<p>我直接尝试了二进制安装，参考<a
+  href="https://docs.gitea.io/zh-cn/install-from-binary/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>官方教程</a>。</p>
+<p>同样需要把目录权限赋予当前用户。</p>
+<p>如果在 root 用户下启用 <code>./gitea web</code>，它会提示你 git 不需要用 root 用户并退出，硬要用 root 似乎也可以，按它的提示即可。</p>
+<p>端口默认也是 3000，如有冲突解决方法和 gogs 类似。</p>
+<p>官方提供了一个<a
+  href="https://github.com/go-gitea/gitea/blob/main/custom/conf/app.example.ini"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>样例</a>来解释你可以设置的选项。</p>
+<p>启动之后的设置和 gogs 基本一样，不过你可以看见，默认主题是暗色主题（我挺喜欢这个）</p>
+<p>预览一下最终界面：</p>
+<p></p>
+<h2 id="ip-和端口映射">IP 和端口映射</h2>
+<p>到现在为止，无论是 gogs 还是 gitea，也无论如何安装，用户都得通过 <code>服务器 IP:端口</code> 的方式访问主页，这无疑是很不便而丑陋的。</p>
+<p>所以应当通过映射来使用域名直接访问。</p>
+<p>可以参考我的<a
+  href="http://blog.cxz888.xyz/posts/blog_site_note_1/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>「个人博客建站笔记」1.网站建成</a>中域名解析的部分。</p>
+<p>在你的域名服务上提供的 DNS 解析里添加 A 记录。比如我是将 <code>repo.cxz888.xyz</code> 解析到自己的服务器 IP。</p>
+<p>DNS 解析对端口是一无所知的，所以现在得通过 <code>repo.cxz888.xyz:端口号</code> 来访问 git 服务，还是比较丑。</p>
+<p>下一步就是通过宝塔的反向代理来解析端口。如果你不是用宝塔，那么可以根据你使用的 web 服务器软件，如 nginx、apache，去百度或谷歌搜索反向代理的方法。</p>
+<blockquote>
+<p>你也可以顺手给这个网站申请个 SSL 证书</p>
+</blockquote>
+<p></p>
+<p>如上图，在宝塔后台设置反向代理，名称随意填，目标 URL 代表你实际要访问的地址，可以填入 <code>http://服务器IP:端口号</code>，发送域名就填上刚刚解析的域名即可。</p>
+<p>现在，应该可以直接通过域名进入 git 服务了。</p>
+<p>恭喜你完成了自建 git 服务。<em>★,°</em>:.☆(￣ ▽ ￣)/$:<em>.°★</em> 。</p>
+<p>如有疑问，欢迎评论留言~</p>
+<blockquote>
+<p>版权声明：本文采用 <a
+  href="http://creativecommons.org/licenses/by/4.0/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>CC BY 4.0</a> 进行许可，转载请注明出处。</p>
+<p>本文链接：<a
+  href="http://blog.cxz888.xyz/posts/tech/self-build_git_service_with_gitea/"
+  
+  
+  
+  
+  
+>http://blog.cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</a></p>
+</blockquote>]]></description>
+</item><item>
+  <title> 数电实验验收，关于内卷</title>
+  <link>http://blog.cxz888.xyz/posts/life/thought_about_involution/</link>
+  <pubDate>Thu, 11 Aug 2022 21:48:06 &#43;0800</pubDate>
+  <author>cxz888</author>
+  <guid>http://blog.cxz888.xyz/posts/life/thought_about_involution/</guid>
+  <description><![CDATA[<p>今天 (2022/5/15) 验收数电的实验。</p>
+<p>各路神仙大战。</p>
+<p>太可怕了。</p>
+<p>可人生的意义难道仅在于此吗？</p>
+<h2 id="id-1">1</h2>
+<p>数电实验的内容是使用蜂鸣器演奏歌曲。</p>
+<p>模板代码老师写好了。基础任务就是换首曲子就行，扩展任务也就是加上变调的功能。</p>
+<p></p>
+<p>我摆了，所以只做了基础任务。本来想换首国际歌，可惜室友先行一步，于是我又换了喀秋莎。</p>
+<p>这个曲子我挺喜欢的，音调不高也不低。半个小时搞定了，十五分钟挑歌，十五分钟敲成代码。</p>
+<p>今天验收一看。神仙打架。</p>
+<p>变调可以升八度降八度的，可以暂停的，可以倍速播放的，还有我压根没听过的“按钮消抖”。</p>
+<p>麻了。</p>
+<p>对了，似乎只有我一人，真的只完成了基础任务。</p>
+<p>我验收恐怕只有一分钟，半分钟用在连接板子上。</p>
+<h2 id="id-2">2</h2>
+<p>内卷无时无刻不伴随着我。</p>
+<p>大一时我是卷怪。每天六点起床，“学”到晚上十二点。每一小时都安排得仔仔细细。</p>
+<p>因为高考失利，没能进计算机系，为了转专业迫不得已。</p>
+<p>结局是美好的。我成功了。</p>
+<p>我和第二名的差距，比第二名和第十三名的差距都大。</p>
+<p>只是绩点而已。</p>
+<p>这也是我最后悔的事情之一。</p>
+<p>如果大一我能不要那么卷，我是不是能学到更多有意思的东西？而非延续高三的经历，题海中挣扎一年。</p>
+<p>编译原理、计组、计网、操作系统……那么多有意思的东西，学都学不完。</p>
+<h2 id="id-3">3</h2>
+<p>内卷这件事可怕之处在于大家也许不想卷，甚至极度反感卷，却又不得不卷。</p>
+<p>考研的机会越来越少，竞争越来越激烈。保研的名额有限，想去好学校还得有亮眼的经历。</p>
+<p>学生的信息渠道狭窄，不知道其他人如何，也不知道自己要做到什么程度才合适——正如我大一不知道要卷成什么样才能刚好转专业而又不至于浪费时间。</p>
+<p>单一的信息面锁定了我们，我们惟卷以待——只要卷到最狠，一定是最优解。</p>
+<p>我不卷了，不止是因为我反卷。我身边那么多人，没见过哪个爱卷的。</p>
+<p>我能不卷，只是因为我不打算读研。我毕业就去工作，而且自信有能力进个好厂。</p>
+<p>如果我要读研呢？那我大概也会成为卷卷洪流的一份子吧。</p>
+<p>大一的内卷经历确实给了我学习自己喜爱专业的机会，然而除此之外几乎只余祸害。</p>
+<p>内卷不会为我的人生留下太多，只是犹如过境蝗虫般攫取我的青春罢。</p>
+<p>以后我也许会回忆起我大二时写的编译器、爬虫、写作软件，至于数电实验雕花，恐怕很快就会遗忘吧。</p>
+<h2 id="id-4">4</h2>
+<p>说了很多。</p>
+<p>但其实仔细一想，为什么而卷？</p>
+<p>答曰：先苦后甜。少壮不努力，老大徒伤悲。（容我把卷和努力混为一谈，这俩并不是一个性质）</p>
+<p>我们期待着更好的未来。那就必须在看不清路的现在做好准备。</p>
+<p>问题是，更好有多好？更好能多好？以及，值得吗？</p>
+<p>高三毕业的时候我就知道。</p>
+<p>我未来不需要大富大贵、山珍海味、名动天下等等听上去很诱人的话。</p>
+<p>我只希望悠悠闲闲过完一生。</p>
+<p>我不打算结婚，房、车对我来说可有可无。我不在乎衣服好坏，能穿就行；我不在乎吃得多好，门口沙县小吃就是顶美味的。</p>
+<p>想了想，我最可能烧钱的理想也许是，希望将来可以走遍整个中国，尝遍所有的民间美食——不过因为比较懒，可能明年就会砍了这个理想吧。</p>
+<p>即使是这样，我大一还是卷了。</p>
+<p>大部分是因为更喜欢计算机而不喜欢原专业；另一部分也不可否认，计算机的待遇现在是极好的。</p>
+<p>当然现在差不多彻底摆了，因为几乎可以肯定现在的我按部就班就足够达成目标了。</p>
+<p>那其他人呢？不可以要求其他人什么都不在乎，我不在乎只是个人性格使然。</p>
+<p>那在乎的，就活该得不到，或者活该卷成这样才能得到？</p>
+<p>婚、房、车对于许多现代人来说是刚需。为什么刚需的满足都已经这么艰难了？</p>
+<h2 id="id-5">5</h2>
+<p>感触良多，迷茫良多。</p>
+<p>其实想写的不止这些。有很多想说的内容却出不了口。</p>
+<p>也许是我的文笔实在浅薄吧。</p>
+<p>还是写代码适合我。</p>]]></description>
+</item><item>
+  <title>使用 WSL2 时碰到的小问题</title>
+  <link>http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</link>
+  <pubDate>Thu, 11 Aug 2022 21:02:21 &#43;0800</pubDate>
+  <author>cxz888</author>
+  <guid>http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</guid>
+  <description><![CDATA[<p>写这篇博客时，我因为 CS110L 的作业要求必须安装 Linux 环境。几番周折最后选择了 Windows 下的 WSL2。现在看来很不错。</p>
+<p>过程中也遇到一些小坑：</p>
+<ol>
+<li>磁盘占用问题，<code>wsl --install</code>默认安装在 C 盘</li>
+<li>代理问题 &ldquo;# Failed to establish a socket connection to proxies: [&ldquo;PROXY XXX.XXX.XXX.XXX:7890&rdquo;]&rdquo;</li>
+<li>换源问题，源和系统版本不一致导致升级的包不对</li>
+<li>Rust 编译报错&quot;/usr/bin/ld: cannot find Scrt1.o: No such file or directory&quot;</li>
+</ol>
+<p>下面一一详细记录了问题和解决方案，参考了很多网上的方法，都附了链接。</p>
+<h2 id="磁盘占用问题">磁盘占用问题</h2>
+<p>安装 WSL2，刚开始我用的是微软文档里写的方法，直接在命令行里<code>wsl --install</code>。后来我忽然意识到，这样安装的系统默认是在 C 盘的。而我的 C 盘早都红了，只留下 7、8 个 G 的样子。考虑到未来的使用恐怕是不足够的。</p>
+<p>好嘛，只好先卸载 WSL 了。准确来说是卸载 WSL 里面安装好的 Linux 发行版。这个找网上教程即可。</p>
+<blockquote>
+<p>顺便一提，如果不用<code>wsl --install</code>，按照网上找到的教程，你需要手动去控制面板打开 Windows 的 WSL 选项。重启后再去手动下载 ubuntu 发行版。<code>wsl --install</code>应该是帮你把这两步都做了，但是还是需要重启的，它会在重启后才安装 Linux 发行版。</p>
+</blockquote>
+<p>想要自定义安装路径，就需要手动下载 ubuntu 安装包，在<a
+  href="https://docs.microsoft.com/zh-cn/windows/wsl/install-manual"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>微软 WSL2 文档</a> 中查看发行版列表。如下</p>
+<p></p>
+<p>如果本文附带的链接失效了，你可以自己去搜索微软的 WSL2 文档。</p>
+<p>点击上图中你想要的发行版，就会开始下载。另外提一句，最上面的 Ubuntu 似乎是 20.04 版本的，不知道它和下面的 Ubuntu 20.04 有什么区别。</p>
+<p>下载好的文件大概是这个样子。</p>
+<p></p>
+<p>直接运行它会直接通过 Microsoft Store 安装，不过我们不这么做（因为可能改不了路径）。我们把它当作压缩文件打开，比如改后缀打开，或者右键、打开方式里选压缩软件打开。内容大致如下。</p>
+<p></p>
+<p>里面有很多东西，不过比较大的就一个 x64 结尾，一个 ARM64 结尾。根据架构自行选择即可。</p>
+<p>把这个 <code>.appx</code> 文件当作压缩文件解压。如果不行，就先把它后缀的改成 <code>.zip</code> 再解压。解压的目标位置就是你希望 Linux 发行版安装的位置。</p>
+<p>现在你应该得到了一堆文件，其中应该有一个很显眼的 <code>ubuntu.exe</code>。运行它，等待安装就可以了。最后它可能会生成一个 <code>.vhdx</code> 文件，这应该就是你的 Linux 发行版系统内部所有文件的存储位置了（所以其它文件可以删了）。</p>
+<p>最后，在命令行输入 <code>wsl</code>，就可以启动 Linux 系统啦。</p>
+<p>参考文章：<a
+  href="https://zhuanlan.zhihu.com/p/263089007?ivk_sa=1024320u"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>自定义 WSL 的安装位置，别再装到 C 盘啦</a></p>
+<h2 id="代理问题">代理问题</h2>
+<p>如果你挂了梯子，那么可能在 WSL 里遇到问题。你可能会看到类似于 <code># Failed to establish a socket connection to proxies: [&quot;PROXY XXX.XXX.XXX.XXX:XXXX&quot;]</code> 这样的错误。而且你会发现，在 Windows 上能访问 Google 等网站，在 WSL 上用 <code>wget</code> 等命令就无法访问。</p>
+<p>此时可以先去 powershell（注意在宿主机，也就是 Windows 上）执行 <code>ipconfig</code> 查看 WSL 的 IPv4 地址。类似于下图</p>
+<p></p>
+<p>假设你查询到的 IP 地址是 XXX.XXX.XXX.XXX，那么就在 WSL 上修改 <code>http_proxy</code> 和 <code>https_proxy</code> 这两个环境变量。比如用<code>export</code>命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&#34;http://XXX.XXX.XXX.XXX:PORT&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span><span class="s2">&#34;http://XXX.XXX.XXX.XXX:PORT&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中 PORT 是你的代理软件开放的 LAN 端口，对于 clash 而言是 7890。（2022/8/11 时）</p>
+<p>注意 <code>https_proxy</code> 的值不需要是 <code>https</code>，否则未来很可能在使用 <code>curl</code> 时出现 OpenSSL 错误。</p>
+<p>这个命令是每次打开 WSL 都要输的，你可以用别名来简化流程，也可以设置 /etc/profile 文件来一劳永逸。</p>
+<p>而且你还需要打开你代理软件的“允许 LAN”的选项。如果你用的是 Clash for Windows，就是首页的那个 Allow LAN。</p>
+<p>如果现在还不行，有可能是防火墙的问题，在控制面板-&gt;系统和安全-&gt;Windows Defender 防火墙-&gt;允许应用通过 Window 防火墙中，把你的代理软件的相关项全部打上勾。</p>
+<p>现在在 WSL 里应该也可以访问 Google 了。</p>
+<p>如果某一天你发现 WSL 里面代理又不好使了，可以重新在 Windows 下输入 <code>ipconfig</code> 查看 WSL 的 IP 地址。这个地址不是固定的，有可能变化。</p>
+<p>参考博客：<a
+  href="https://blog.lishunyang.com/2021/02/wsl2-dev-env.html"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>WSL 开发环境的坑（不定期更新）</a></p>
+<h2 id="换源问题">换源问题</h2>
+<p>换源也不是随便换的。</p>
+<p>首先用命令 <code>lsb_release -a</code>，查看自己的发行版本和代号。</p>
+<p>比如我用的这个是 ubuntu 20.04 代号为 <code>focal</code>。</p>
+<p>那么相应的，换源时就得注意这个代号。</p>
+<p>首先用 <code>sudo vim /etc/apt/sources.list</code> 打开文件（如果你不会使用 vim 就用别的文本编辑器）</p>
+<p>然后删除原来的内容，输入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#阿里源
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意看，其中有 <code>focal</code> 这个代号，一定要和自己版本的代号一致。</p>
+<p>换完源之后别忘了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">sudo</span> <span class="nb">apt-get</span> <span class="n">update</span>    <span class="c"># 更新源</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="nb">apt-get</span> <span class="n">upgrade</span>   <span class="c"># 更新软件包</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参考博客：<a
+  href="https://blog.csdn.net/WU2629409421perfect/article/details/110881141"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Ubuntu 20.04 &amp;&amp; Ubuntu 18.04 修改 apt 源</a></p>
+<h2 id="rust-编译报错">rust 编译报错</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/usr/bin/ld: cannot find Scrt1.o: No such file or directory
+</span></span><span class="line"><span class="cl">/usr/bin/ld: cannot find crti.o: No such file or directory
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个可能是因为我刚开始换源没换对引发的错误。</p>
+<p>总之如果你出现这个问题，可以尝试按上面操作换到正确的源上，然后更新一下试试。</p>
+<p>如果不行的话，再使用 <code>sudo apt-get install libc6-dev</code> 安装软件包。这样应该能解决问题了。</p>
+<p><a
+  href="https://blog.csdn.net/weixin_42255281/article/details/110820663"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>usr/bin/ld: cannot find crti.o: No such file or directory</a></p>
+<h2 id="总结">总结</h2>
+<p>WSL2 要占用不少内存，不过使用起来体验比 VMWare 要好很多。如果你不是很在乎图形界面的话，那么推荐可以尝试一下。（其实也有在 WSL2 中使用 GUI 的方法，不过似乎要 Win11）</p>
+<blockquote>
+<p>版权声明：本文采用 <a
+  href="http://creativecommons.org/licenses/by/4.0/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>CC BY 4.0</a> 进行许可，转载请注明出处。</p>
+<p>本文链接：<a
+  href="http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/"
+  
+  
+  
+  
+  
+>http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</a></p>
+</blockquote>]]></description>
+</item><item>
+  <title>最长公共子序列 (LCS) 在 diff 命令中的应用——Myers 算法</title>
+  <link>http://blog.cxz888.xyz/posts/tech/lcs_for_diff_myers/</link>
+  <pubDate>Thu, 11 Aug 2022 18:52:26 &#43;0800</pubDate>
+  <author>cxz888</author>
+  <guid>http://blog.cxz888.xyz/posts/tech/lcs_for_diff_myers/</guid>
+  <description><![CDATA[<p>今天 (2022/2/26) 做 CS 110L 的 week2 作业，内容是用 Rust 编写一个简单的 <code>diff</code> 命令。</p>
+<p>我才知道原来 Linux 和 Git 的 <code>diff</code> 命令，它的底层算法之一叫做 Myers 算法，而其根本原理是最长公共子序列。</p>
+<p>本文讲述 <strong>LCS 的使用和 Myers 算法</strong>。前置知识是动态规划求解 LCS。</p>
+<!--more-->
+<h2 id="diff-命令做了什么">diff 命令做了什么</h2>
+<p>如果你常用 GitHub，应该经常可以看到如下界面。</p>
+<p></p>
+<p>这表示 <code>diff</code> 命令显示出的本次提交和仓库里之前版本的区别。如你所见，红色、以 <code>-</code> 开头的行代表删除，绿色、以 <code>+</code> 开头的行代表新内容。</p>
+<p>你可能会说，上图这样明显是对同一行进行修改，而并没有删除或者添加行啊。确实，但是仔细想想，修改的操作其实可以等价地转换为删除原来的行，然后添上修改之后的行。</p>
+<p>这样的等价转换对于底层算法的实现是比较有利的。</p>
+<p>我们把代码不同版本的对比问题抽象一下。首先是代码，代码是一个行构成的序列，也就是说，它的先后关系是重要的；那么，两个版本的代码之间的比较，就相当于两个序列之间的比较。</p>
+<p>除去删除或者添加的行，你可以看到还有很多不变的行。它们就是两个序列所共有的成分。而你可以想一下，删除的行，实际上是旧版本代码的特有内容；新添的行，实际上是新版本代码的特有内容。</p>
+<p>那么每个代码都是由特有和共有的内容混合组成的，如下。</p>
+<p>code1: 共有 1 旧特有 1 共有 2 旧特有 2 旧特有 3 共有 3</p>
+<p>code2: 共有 1 共有 2 新特有 1 共有 3 新特有 2</p>
+<p>我们要做的，其实就是判断两个代码之间哪些是共有、哪些是旧版本特有，哪些是新版本特有的。</p>
+<p>到这你就可以想到了，共有的成分，那不就是公共子序列吗。</p>
+<h2 id="最长公共子序列lcs">最长公共子序列(LCS)</h2>
+<p>这一部分我假定你是有相关基础的，如果没有的话建议去搜几篇文章看看。</p>
+<p>我们来回忆一下，LCS 描述这样一种问题：在两个序列中，找到它们共有的最长的子序列。序列一是 <code>1 2 3 4</code>，序列二是 <code>1 3 4 5</code>，那么 LCS 就是 <code>1 3 4</code>。</p>
+<p>LCS 的求法，比较常规的是动态规划 $O(n^2)$ 求解。</p>
+<p>假定两个序列是 <code>s1</code> 和 <code>s2</code>，长度分别为 <code>n</code> 和 <code>m</code>，我们定义二维数组 <code>dp[n+1][m+1]</code>（+1 是为了方便）。<code>dp[i][j]</code> 表示“<code>s1</code> 前 <code>i</code> 项和 <code>s2</code> 前 <code>j</code> 项的 LCS 的长度”。那么就有如下状态转移函数。</p>
+<p>$$
+\begin{aligned}
+dp[i][j]=
+\begin{cases}
+&amp;0,&amp;若 i=0 或 j=0\\
+&amp;dp[i-1][j-1]+1,&amp;若s[i-1]=s[j-1]\\
+&amp;max(dp[i-1][j],dp[i][j-1]),&amp;若s[i-1]\ne s[j-1]
+\end{cases}
+\end{aligned}
+$$</p>
+<h2 id="myers-算法">Myers 算法</h2>
+<p>如果让你用 LCS 来做 <code>diff</code>，你会如何完成？我的第一想法是，从<code>dp[n][m]</code>开始，可以依次往上追溯，找到所有的公共项。那么两个序列中剩下的部分就是各自特有的了。</p>
+<p>Myers 算法也是这个思路，不过它稍微高明一些，在回溯的过程中就同时判定公共项和特有项。</p>
+<p>我们先来看一张图。</p>
+<p></p>
+<blockquote>
+<p>图片来自<a
+  href="https://www.cnblogs.com/zqybegin/p/13734107.html"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>这个博客</a></p>
+</blockquote>
+<p>上图是序列 <code>ABCBDAB</code> 和 <code>BDCABA</code> 的 dp 结果。箭头表示转移路径。</p>
+<p>如你所见，从最右下角出发，沿着路径一直向左上方找到起点（灰色底色）。</p>
+<p>Myers 算法的思路就是：如果它是向左上转移，说明这是公共部分；如果向上转移，那么它就是第一个序列的特有部分；如果向左转移，那么就是第二个序列的特有部分。</p>
+<p>C++ 代码如下（Rust 直接改的，我没测试）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-cpp" data-lang="cpp"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">print_diff</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="o">&amp;</span><span class="n">dp</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s1</span><span class="p">,</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="o">&amp;</span><span class="n">s2</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">s1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">s2</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_diff</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;  &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">s1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_diff</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;+ &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">s2</span><span class="p">[</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">i</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dp</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="n">j</span><span class="p">]))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">print_diff</span><span class="p">(</span><span class="n">dp</span><span class="p">,</span> <span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">,</span> <span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;- &#34;</span> <span class="o">&lt;&lt;</span> <span class="n">s1</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你可以看到，它是一个递归的做法，以此来让输出顺序颠倒。</p>
+<p>你也可以不用递归，每次把输出结果存在一个 <code>stack</code> 中，以此用循环完成。</p>
+<h2 id="总结">总结</h2>
+<p>有了以上知识点，想实现 <code>diff</code> 就很容易了。我们可以用 <code>getline</code> 之类的读入代码，用一个 <code>vector&lt;string&gt;</code> 存储，每一项存储一行代码。然后再用一个 LCS 函数求出 <code>dp</code> 数组。最后传 到<code>print_diff</code> 函数，就可以得到结果了。</p>
+<p>不过，LCS 的 DP 求解算法复杂度是 $O(n^2)$，而且据说被证明不可改进。所以据说实践中常常用一些线性复杂度的近似算法。</p>
+<blockquote>
+<p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>进行许可，转载请注明出处。</p>
+<p>本文链接：<a
+  href="http://blog.cxz888.xyz/posts/tech/lcs_for_diff_myers/"
+  
+  
+  
+  
+  
+>http://blog.cxz888.xyz/posts/tech/lcs_for_diff_myers/</a></p>
+</blockquote>]]></description>
+</item><item>
+  <title>「工具推荐——软件」1.WGestures：鼠标手势</title>
+  <link>http://blog.cxz888.xyz/posts/tech/recommand_tool_wgestures/</link>
+  <pubDate>Thu, 11 Aug 2022 17:20:02 &#43;0800</pubDate>
+  <author>cxz888</author>
+  <guid>http://blog.cxz888.xyz/posts/tech/recommand_tool_wgestures/</guid>
+  <description><![CDATA[<p>这个系列主要是推荐一些计算机上好使用的工具。目前计划是除去软件，还会分享一些网站，所以也细分开来了。</p>
+<p>本文介绍 <strong>WGestures，一个免费开源的鼠标手势软件</strong>。</p>
+<h2 id="功能介绍">功能介绍</h2>
+<p>你曾经也许在某些浏览器中接触过鼠标手势。我最初是在猎豹浏览器上用到的，虽然浏览器的整体使用感觉没那么好，但是鼠标手势这一项却是非常不错。</p>
+<p>后来换到 Chrome，再到 Vivaldi，再到 Edge，始终没有更好的体验。实际上它们有的压根就不支持鼠标手势，也是蛮遗憾的。</p>
+<p>Chrome、Edge 的插件里有很多鼠标手势相关的，我用过几款，只能说大失所望（很久之前了，现在不知道如何）。</p>
+<p>今天要推荐的这款 WGestures，几乎解决了我的所有痛点。而且不仅仅是局限于浏览器中，它是在整个系统上都可以使用的全局鼠标手势软件。</p>
+<p>下面是两张示例，图片来自于 WGestures 的 <a
+  href="https://github.com/yingDev/WGestures"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Github 仓库</a>。</p>
+<p>
+</p>
+<p>如你所见，你可以用一个鼠标手势来执行一个动作，而且它会在屏幕下方展示出手势的名称，防止误操作。</p>
+<p>除去这个之外，它还支持一个叫做触发角 &amp; 摩擦边的功能。只需要把鼠标移动到屏幕的四个角落或者是在四条边上摩擦就可以执行相应的动作。不过因为我比较多动症，很容易误触发，所以就没用它。</p>
+<p>WGestures 支持 Windows7+。它有一个升级的界面更优美、功能更丰富的第二版，WGestures2，除了 windows 还支持 macOS，不过这是一个付费软件，大约需要三四十人民币的样子。</p>
+<p>下载地址：<a href="http://www.yingdev.com/projects/wgestures" target="_blank" rel="noopener">官网</a>。</p>
+<h2 id="软件特点">软件特点</h2>
+<p>接下来讲一讲 WGestrues 一些很对我胃口的点。</p>
+<p>首先是，它高度可定制化，这表现在两点。</p>
+<p>第一，它是开源软件，这意味着你如果对软件功能不满意，完全可以从代码层面上进行自己的修改。它的源码是 C# 写的。</p>
+<p>第二，设置丰富且简明。它可以设置的东西包括且不限于：开机运行、自动更新、是否显示手势名称和轨迹、轨迹颜色等等。手势触发的动作也可以自己选择，甚至可以让手势执行代码（支持 Lua 脚本）。</p>
+<p>它还有一个有点是占用性能极低，我运行时仅占用 15M 的内存。</p>
+<h2 id="使用指南">使用指南</h2>
+<p>这是软件界面。</p>
+
+<p>如你所见，上面的选项已经十分清楚了，如果有不理解它意思的，将鼠标放上去会有详细介绍。</p>
+<p>这里讲一下，手势键里的“X 键”，实际上是某些鼠标上会附加的网页前进和网页后退键（一般在鼠标的侧面）。然后就是按 Ctrl-Shift-Alt+W 可以停止使用鼠标手势，在打游戏时很好用。</p>
+<p>更重要的是“手势”页，如下</p>
+
+<p>左侧的边框里，可以选择全局设置或者是针对某些软件进行特殊设置。而右侧就可以设置你想要的鼠标手势了，触发上面那些手势，就可以执行下面设置的相应动作，可以看到功能极其丰富。</p>
+<h2 id="总结">总结</h2>
+<p>这款软件给我带来了不少的助力，算是提高了一些工作效率吧，而且它简单易用的设置实在深得我心，可以说是我最喜欢的软件之一了。</p>
+<p>第一期软件介绍到此结束啦。如果你有想推荐的软件，欢迎联系我投稿哦。</p>
+<blockquote>
+<p>本文采用 <a
+  href="http://creativecommons.org/licenses/by/4.0/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>CC BY 4.0</a> 进行许可，转载请注明出处。</p>
+<p>本文链接：<a
+  href="http://blog.cxz888.xyz/posts/tech/recommand_tool_wgestures/"
+  
+  
+  
+  
+  
+>http://blog.cxz888.xyz/posts/tech/recommand_tool_wgestures/</a></p>
+</blockquote>]]></description>
+</item><item>
+  <title>「个人博客建站笔记」2.网站的布局</title>
+  <link>http://blog.cxz888.xyz/posts/tech/blog_site_note_2/</link>
+  <pubDate>Thu, 11 Aug 2022 11:21:45 &#43;0800</pubDate>
+  <author>cxz888</author>
+  <guid>http://blog.cxz888.xyz/posts/tech/blog_site_note_2/</guid>
+  <description><![CDATA[<p>本文讲述<strong>如何优化 WordPress 网站的界面布局</strong>。</p>
+<ul>
+<li>涉及内容：网站后台、主题、PHP、HTML、CSS。</li>
+<li>面向人群：新手。</li>
+<li>前置知识：WordPress 网站的搭建（见<a
+  href="https://cxz888.xyz/posts/blog_site_note_1"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>「个人博客建站笔记」——1.网站建成</a>）。</li>
+</ul>
+<h2 id="网站后台">网站后台</h2>
+<p>如果你刚刚搭建好一个 WordPress 网站，那么此时你应该得到了一个默认主题下的主页，只有一个示例页面。</p>
+<p>此时网页的功能很简陋，几乎只能写写文章，发发评论。像什么标签、分类、留言板都没有。而且默认的主题可能和你的审美对不上，还有标题字体太小、主页面背景不好等问题。</p>
+<p>那么就需要利用网站的后台进行一些自定义的设置了。</p>
+<p>点击左上角仪表盘的标志，或者在你网址的后方加上 <code>/wp-admin</code>，就可以进入后台。</p>
+<p>后台左侧的菜单里有很多选项，这里不一一细讲。</p>
+<p>不过值得一提的是，在默认的主题下，你可以在外观-编辑器（beta 版）里可视化地调整页面布局，这一点还是很方便的。外观-自定义是另一个方便的工具，也是可以即时预览你的修改的，你还可以在里面设置网站的名称、副标题和图标。</p>
+<p>当然，上述修改大多只是小幅微调，想要有大的整体页面上的变化，需要你进行很多很细致的调整。真正一步到位，改变整个网站的是接下来介绍的主题。</p>
+<h2 id="主题">主题</h2>
+<p>如同很多软件一样， WordPress 同样有主题系统。它的主题不仅改变网页的样式，还会更改网页的交互逻辑，比如，如何登录、如何评论等等。</p>
+<p>在后台的外观-主题页面里，你可以在线搜索主题，也可以上传一个 zip 包压缩的主题。主题的推荐可以去知乎等地求解。就我所知许多开发者会在 Github 上开源他们的主题，我之前用的 WordPress 主题就是 <a
+  href="https://github.com/dimpurr/Clearision"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Github 上面</a>下载，然后自己做了一些修改。</p>
+<p>一些比较完善的主题会提供友好的界面来让你进行一定程度的定制，而无需写代码。如果你没有什么代码基础，那么还是建议仔细挑选一个这样的主题。不过再如何完善，其自由度也很难及得上写代码。</p>
+<p>大多数时候，用好主题就可以得到一个令人满意的优美网站，不过如果你还想要更多、更个性化的定制，那么你可以继续往下阅读，我会讲一些前端和后端相关的代码处理。而如果你不想写代码，可以跳到最后，我会推荐一些个人感觉不错的免费主题。</p>
+<h2 id="html">HTML</h2>
+<p>一般地，网页本质上都是 HTML 代码构成的。</p>
+<p>HTML 中文名称超文本标记语言(Hyper Text Markup Language)，听上去很厉害，其实所谓超文本就是说，它能够表达的内容不单单是文本。</p>
+<p>如下代码就表示一个文字内容为“只能按”的按钮。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">button</span><span class="p">&gt;</span>只能按<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它真正表现在网页上就是这个样子：<button>只能按</button>。</p>
+<p>层层嵌套的 HTML 代码，可以生成功能十分丰富的网页。</p>
+<p>比如你现在看的这个网页，你可以在空白处右键，可能就会有“查看网页源代码”的选项。你将会在其中看到整个网页的 HTML 形式，如果你将它复制下来存到本地再打开，完全可以得到一个一模一样的网页。</p>
+<p>当然，只是看上去一样，实际上去你去点那些按钮，可能都是毫无反应的，因为网页系统往往是由很多个 HTML 文件构成，而且还会依托其它的一些东西。</p>
+<p>比如说，CSS，或称层叠样式表(Cascading Style Sheets)。</p>
+<h2 id="css">CSS</h2>
+<p>HTML 描述网站的内容，但它对于内容的样式、形貌的表达力是比较薄弱的。</p>
+<p>比如你想要控制刚刚那个按钮，它背景色什么样子、前景色什么样子、字号多大，距离右边框多远等等。HTML 很难完成这些，而这就是 CSS 发光发热的领域了。</p>
+<blockquote>
+<p>事实上，你应该很少会需要写 HTML 代码，因为它是主管内容的——而我们有更好的、可视化的方式来管理内容，比如 markdown 或者是 WordPress 自带的编辑器。相对来说你可能会和 CSS 打更多交道，它是主管外貌的。</p>
+</blockquote>
+<h2 id="php">PHP</h2>
+<p>如果按照程序员的分类，HTML 和 CSS 所作的都是“前端”的工作，简单来说就是直接呈现在用户视觉上的效果。</p>
+<blockquote>
+<p>其实，传统的前端开发是使用 HTML+CSS+JavaScript 三件套的。不过我对 JS 目前没有太多了解，就先不写了。</p>
+</blockquote>
+<p>而这背后，当然还需要一个工具人，处理网页和服务器之间的数据交换。</p>
+<p>PHP 是一个后端开发的语言。</p>
+<p>目前我最常用到 PHP 的场景，其实是需要做条件判断的时候。比如用户是否登录，肯定是要展现不一样的界面的；还有就是根据权限隐藏掉一部分不太好展示的东西。</p>
+<h2 id="例子clearision">例子：Clearision</h2>
+<p>Clearision 是之前本站的主要主题。它相对来说功能比较简陋，但是界面我蛮喜欢的。</p>
+<p>而且功能简陋，所以代码逻辑也比较好理解、好修改。</p>
+<p>所以接下来我就以它为例子，讲一讲怎么自定义主题。</p>
+<h3 id="主题提供的设置">主题提供的设置</h3>
+<p>正如大部分主题，Clearision 在后台提供了一些设置方便自定义网页的外观和交互。如下：</p>
+<p></p>
+<p>在这里你可以设置主页上的 Logo 头像、网页的图标、社交主页的网址、是否显示访客环境、是否显示作者等。</p>
+<p>整体而言功能不多。</p>
+<h3 id="修改主题文件">修改主题文件</h3>
+<p>接下来是比较关键的部分。在 Clearision 设置的下方，可以看到主题文件编辑器。</p>
+<p></p>
+<p>是的，接下来就需要修改代码了。</p>
+<p>首先要提一点的是，Wordpress 官方推荐使用子主题的方式来自己修改主题，这样的好处是如果原主题更新了，不会覆盖掉自定义的内容。方法可以在 wordpress 的教程里找到。</p>
+<p>对于 Clearision 没有这个必要，一来是原主题已经很久没更新过了，估计以后也不会更新了，二来是子主题的方案还是会导致一些问题（如缓存等）。</p>
+<p>我们直接在原文件里更改就行。也就是上图右侧那些主题文件。有些文件的中文会指出它的用处。</p>
+<p>这些文件的加载顺序、逻辑结构也是很有讲究的，这里不深究，有兴趣可以去自行搜索。</p>
+<p><code>functions.php</code> 和 <code>style.css</code> 是我经常打交道的两个。</p>
+<p><code>functions.php</code> 添加一些功能性的操作。比如说我想修改用户注销之后跳转的界面，就可以在里面加入如下内容</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-php" data-lang="php"><span class="line"><span class="cl"><span class="c1"># 注销后重定向至
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">add_action</span><span class="p">(</span><span class="s1">&#39;wp_logout&#39;</span><span class="p">,</span><span class="s1">&#39;auto_redirect_after_logout&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">function</span> <span class="nf">auto_redirect_after_logout</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">nocache_headers</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">	<span class="nx">wp_safe_redirect</span><span class="p">(</span> <span class="nx">home_url</span><span class="p">()</span> <span class="p">);</span>
+</span></span><span class="line"><span class="cl">	<span class="k">exit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>它也可以用来修改一部分的外观内容，主要是是否展示，而不管其细节。</p>
+<p>而正如上面所言，<code>style.css</code> 主管整个网站的所有样式细节。</p>
+<p>比如我想修改用户“发表评论”按键的样式，就可以这么写。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-css" data-lang="css"><span class="line"><span class="cl"><span class="c">/* 发表评论的样式 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">#</span><span class="nn">cmt_submit</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">margin</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kp">-moz-</span><span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kp">-webkit-</span><span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">box-sizing</span><span class="p">:</span> <span class="kc">border-box</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kp">-webkit-</span><span class="k">border-radius</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border-radius</span><span class="p">:</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">background</span><span class="p">:</span> <span class="mh">#6f6f6f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">color</span><span class="p">:</span> <span class="mh">#eee</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">font-weight</span><span class="p">:</span> <span class="mi">600</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">display</span><span class="p">:</span> <span class="kc">inline-block</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border</span><span class="p">:</span> <span class="kc">none</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">cursor</span><span class="p">:</span> <span class="kc">pointer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kp">-webkit-</span><span class="k">border-radius</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">border-radius</span><span class="p">:</span> <span class="mi">3</span><span class="kt">px</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>语法部分我不讲，去找些教程有点基本的了解即可。</p>
+<p>另外，CSS 中是可以重复定义一个元素（部件）的样式的。Clearision 原作者在 CSS 里面写了很多内容，如果想要修改怎么办？无需找到相关的内容然后修改，只要在最下方新添样式就可以了。后定义的样式会覆盖先定义的样式。</p>
+<p>你可能在 CSS 编辑界面上方看到提示，说可以在“内建的 CSS 编辑器”中修改 CSS。</p>
+<p>这个实际上就是我上面提到的外观-自定义里面的一个小功能，所谓的额外 CSS。界面大致如下：</p>
+<p></p>
+<p>在左侧的文本框中输入的 CSS 代码，会实时地同步到右侧的网页中，对于调整外观来说十分方便。</p>
+<p>这个功能配上浏览器提供的“检查”（审核元素、开发者工具、F12）会如虎添翼。只需在想要修改样式的地方右键-&gt;检查，就会出现类似下面的界面（这是 Edge 浏览器的界面）</p>
+<p></p>
+<p>在右侧的开发者工具中就可以查看网页的 HTML 代码和 CSS 样式，甚至可以直接在里面修改。</p>
+<p>你可能会说了，不会写代码怎么办？其实我也不是很会，CSS 和 PHP 我都没有系统学习过。大部分的代码其实都来自于网络，只要可以合理描述自己的需求，还是能够找到想要的内容的。</p>
+<p>但是完全不会写代码还是很不便的。网上的代码质量参差不齐，而且可能有过期风险，也可能面临不同浏览器、不同屏幕分辨率等一系列问题。复制代码之后可能会还需要一些微调来解决这些问题。所以有更高需求的话建议还是沉下心来细细学习一下，总之不会亏。</p>
+<h2 id="主题推荐">主题推荐</h2>
+<p>下面是我用过的，比较适合个人博客的两款主题，都是简约风的。</p>
+<p>就算你打算自定义主题，我也推荐你下载几个美观的主题看看。它们会给你增添灵感，而且你可以参考它们的代码实现。</p>
+<h3 id="mdx">MDX</h3>
+<p>这是我个人比较喜欢的另一个主题。功能丰富，界面简洁美观。如果我最先接触到它的话，也许就会使用它。</p>
+<p><a
+  href="https://mdx.flyhigher.top/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>主题主页</a>，<a
+  href="https://github.com/yrccondor/mdx"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Github 仓库</a></p>
+<p>主题主页里有详细的展示，我建议你可以稍微看一下。下面我也会放一些本站使用该主题后的样貌。</p>
+<p>首页：</p>
+<p></p>
+<p>文章：</p>
+<p></p>
+<p>这里我没有仔细去调整，实际上，在后台中有非常多的主题样式搭配。如图。</p>
+<p></p>
+<p>在我短暂的使用中，有两个功能让我很喜欢。</p>
+<p>一个是开启夜间模式，另一个是目录。</p>
+<p>现在的这个主题已经支持这两个特性了，很好用。（本站已经不是用 WordPress 而是 Hugo 了）</p>
+<h3 id="indite">Indite</h3>
+<p>这个主题可以直接在 Wordpress 后台里添加。</p>
+<p>大致外观如下：</p>
+<p></p>
+<p>可以看到配色比较柔和，页面也很简洁。</p>
+<p>这个主题的大部分功能都可以通过外观-自定义修改。不过里面的设置都是英文的，可能需要花些力气。</p>
+<p>另外一点不太好的是，这个边栏太大了，影响阅读体验。</p>
+<h2 id="总结">总结</h2>
+<p>这就是本文的所有内容了。断断续续拖了一个月才完成，着实有些难写。</p>
+<p>想写的内容其实还有很多，但是难以表述出来。如果有疑问的话欢迎评论区里提问。</p>
+<blockquote>
+<p>版权声明：本文采用 <a
+  href="http://creativecommons.org/licenses/by/4.0/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>CC BY 4.0</a> 进行许可，转载请注明出处。</p>
+<p>本文链接：<a
+  href="https://cxz888.xyz/posts/blog_site_note_2/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>https://cxz888.xyz/posts/blog_site_note_2/</a></p>
+</blockquote>]]></description>
+</item><item>
+  <title>「个人博客建站笔记」1.网站建成</title>
+  <link>http://blog.cxz888.xyz/posts/tech/blog_site_note_1/</link>
+  <pubDate>Wed, 10 Aug 2022 18:41:49 &#43;0800</pubDate>
+  <author>cxz888</author>
+  <guid>http://blog.cxz888.xyz/posts/tech/blog_site_note_1/</guid>
+  <description><![CDATA[<p>这是我在以前博客的第一篇文章，主要记述的是使用 WordPress 和宝塔 Linux 面板，从零开始搭建一个基础博客网站的过程。</p>
+<ul>
+<li>涉及内容：服务器、域名、域名解析、宝塔 Linux 面板、wordpress 的使用。</li>
+<li>面向人群：纯新手，无基础。</li>
+<li>前置知识：中文，部分英文。基础网络知识：如 IP 地址是什么，GB、Mbps 是什么单位。基础计算机知识：CPU、内存、硬盘空间是什么，能区分硬件和软件。</li>
+</ul>
+<blockquote>
+<p>旧博客的建成，包括下述内容，有很大一部分是  <a
+  href="https://tofu.icu/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>TriNitroTofu</a>  的功劳，大家有兴趣可以去看看。</p>
+</blockquote>
+<h2 id="基础概念">基础概念</h2>
+<p>为了得到一个可以访问的网站，我们至少需要三个东西：</p>
+<ol>
+<li>服务器</li>
+<li>域名</li>
+<li>网站系统</li>
+</ol>
+<p>网站系统运行在服务器上，提供一个交互的界面，而别人就可以通过域名来访问网站，这就是三者的关系。</p>
+<p>不用域名，直接使用 IP 地址进行访问似乎也是可行的，不过可想而知，那样也太劝退用户了。</p>
+<p>下面就分别简单介绍一下这三个东西。</p>
+<h2 id="服务器">服务器</h2>
+<p>首先是挑选一个合格的服务器，这是三者之中最贵的一个。</p>
+<h3 id="服务器的位置">服务器的位置</h3>
+<p>服务器根据位置分为中国大陆和其他的。</p>
+<p>中国大陆的服务器，如阿里云、华为云之类的，访问速度快，而且也比较便宜，但是最大的问题是需要进行<strong>备案</strong>。据说备案至少需要一个月，多则几个月，显然太缓慢了。</p>
+<blockquote>
+<p>据我所知阿里云有一些学生优惠，免费体验建站的，而且后续也蛮便宜</p>
+</blockquote>
+<p>至于其他的服务器，近的如日本、新加坡，远的如美国，到处都有。它们相对于大陆的服务器来说贵一些、延迟高一些，但好处是无需备案。</p>
+<blockquote>
+<p>我本来以为海外的服务器会被墙，实际上并非如此。不干坏事的话应该没问题。</p>
+</blockquote>
+<p>我选择的是其他服务器。</p>
+<h3 id="服务器的配置">服务器的配置</h3>
+<p>服务器的选择有很多讲究。</p>
+<p>一是<strong>硬件配置</strong>。想要带得动一个能用的动态博客，至少需要 1.5G 及以上内存。1G 内存应该是比较危险的。CPU 要求不高的样子，我的 CPU 使用率一般都很低。然后就是硬盘空间，一般而言文字类博客也用不了太多，图片的话其实可以用图床。</p>
+<p>二是<strong>网络配置</strong>。主要是流量和带宽，还有一个线路问题。首先是流量，我看到过别人的个人博客，一个月总共 30G 也用了很长一段时间了，需求量其实不算很大。带宽的话，个人博客网站应该是不需要多大的，知乎上有说 1M 宽带就够了的。还有一个线路问题，这个我不是很懂，据说 cn2 线路更快。买服务器的时候可能它不会直接提到线路，但是如果有 &ldquo;Asia/China Optimization&rdquo; 之类的字样，应该就是 cn2 线路的。</p>
+<blockquote>
+<p>目前我的网站平均占用 1G 左右内存，硬盘 5.6G。20 号建站到 23 号早晨为止，一共用了 1.4G 左右流量，大部分流量是在建站时候花费的，后面用的很少，</p>
+</blockquote>
+<p>三是<strong>系统</strong>。主要是 Linux 还是 Windows 的区别，目前我所见的基本都是 Linux，所以最好对 Linux 系统有一些基本的了解，无需太深入。Linux 又分为很多发行版，新人的话推荐用 Ubuntu 20.04。</p>
+<h3 id="服务商的选择及服务器购买">服务商的选择及服务器购买</h3>
+<p>以上知识了解了，我们可以开始考虑服务商了。国外的服务商我只知道两家，<a
+  href="https://www.dmit.io/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>DMIT</a> 和 <a
+  href="https://www.vultr.com/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>vultr</a>。前者贵一些，但是有 cn2 线路。后者未接入 cn2 线路，但是不仅便宜，而且还是按小时收费的。我选的是前者，这里简单介绍一下流程，可以跳过。</p>
+<p>进入 <a
+  href="https://www.dmit.io/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>DMIT</a> 的网站，注意右上角可以选择中文（不过是繁体）。创建账户进入客户中心，然后点击左上角的创建，选择伺服器。接下来就可以选服务器了。建议货比三家，仔细看看。注意有的是<strong>季缴</strong>有的是<strong>月缴</strong>。</p>
+<p>选好套餐后点击右下角的继续，下一页是命名主机、设置 root 密码（root 相当于超级用户，拥有所有权限）、选择系统之类的，自己决定就好。然后就是喜闻乐见的付款环节了，结算页面的右侧有一个小框写着“Apply Promo Code”，这个是输优惠码的，如果你是在促销时候买，可能有折扣哦。</p>
+<p>启动蓝色修改器，支付完毕后，服务器这一块暂时没什么问题了。</p>
+<p>哦对了，查看服务器的时候，一般服务商会发给你公钥和私钥文件，注意私钥文件应该是只会出现一次的，下载后<strong>一定要做好备份，千万别丢了</strong>。丢了的话，不出意外就是丢失对服务器的控制权了，我不知道联系客服能不能解决问题。</p>
+<h2 id="域名">域名</h2>
+<h3 id="域名分类">域名分类</h3>
+<p>作为一个互联网熟练用户，你应该已经见过不少域名后缀（学名叫顶级域名）了，像什么 <code>.com</code>、<code>.cn</code>、<code>.org</code> 乃至本站的 <code>.xyz</code>。</p>
+<p>这些域名也是稍有不同的。</p>
+<p>首先，搜索引擎对于不同域名的收录效率是不一样的。像是 <code>.com</code> 这种几十年的老域名，相对来说是快一些的；而<code>.top</code>、<code>.xyz</code>这些新兴域名，可能要慢一些。</p>
+<p>其次，不同域名的价格可以差很多。不过一般来说按年租的话比服务器便宜很多。</p>
+<p>然后就是，据说 <code>.cn</code> 需要备案（也许因为它是中国顶级域名），但是也有人说不需要，这个我不太清楚。</p>
+<h3 id="域名购买">域名购买</h3>
+<p>国内的话，可以在阿里云、百度云、华为云这些地方买。</p>
+<p>而国外呢，我所知道的有 <a
+  href="https://godaddy.com/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>GoDaddy</a>、<a
+  href="https://www.name.com/zh-cn/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>name.com</a>、<a
+  href="https://www.namesilo.com/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>namesilo</a>、<a
+  href="https://www.namecheap.com/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>namecheap</a>。</p>
+<p>我只知道 GoDaddy 是老牌子，而 name.com 便宜些。后两个只是听说性价比不错。我个人选择的是 name.com，它的名气似乎不是很大，以至于中文互联网上没找到什么教程。我就假设你是用的 name.com 了，其他网站的操作也差不了多少。</p>
+<p>在购买域名之前，你需要先决定好网站的地址。顶级域名就那么些，你只能从中选，但是二级域名是由你决定的，如 <code>cxz888.xyz</code>。有些域名可能已经被人注册了，这时候可能你就只能换一个了，如果你实在很想要那个域名，那就得想办法联系拥有者商量了。</p>
+<p>决定好域名，支付完成后，别着急，域名相关的东西还有下一个呢。</p>
+<blockquote>
+<p>买域名的时候，除去域名本身的费用外，还可能附加一些安全和隐私相关的内容。这部分买不买就取决于你了。不过 SSL 证书之后可以弄到免费的。</p>
+</blockquote>
+<h3 id="域名解析">域名解析</h3>
+<p>域名购买好了。但是现在的问题是，这个域名和我们先前买好的服务器有任何关系吗？没有，在不同的商家买的两个东西，哪有什么关系。</p>
+<p>接下来讲的就是把这两个东西联系起来，也就是所谓的 DNS 解析。</p>
+<blockquote>
+<p>简单理解一下 DNS 解析。你的服务器有个 IP 地址，假设是 123.123.123.123，然后你有个域名 <code>xxx.com</code>。DNS 解析要做的就是，当用户在浏览器地址栏输入 <code>xxx.com</code> 时，自动让用户访问 123.123.123.123 这个服务器的网站。</p>
+</blockquote>
+<p>购买好域名，进入后台，点进域名的界面。</p>
+<blockquote>
+<p>具体操作 (name.com)：右上角的用户图标下拉菜单点击 overview（概览），在下面找到自己的域名，如 <code>cxz888.xyz</code>，点进去。</p>
+</blockquote>
+<blockquote>
+<p>另外，name.com 的最下方是可以选择语言的。</p>
+</blockquote>
+<p>差不多是下面这样一个界面。</p>
+<p></p>
+<p>点击上图框红的 &ldquo;Manage DNS Records&rdquo;（管理 DNS 记录）。可以看到下面的界面。</p>
+<p></p>
+<p>&ldquo;HOST&rdquo;（主机）就是你的网站地址，加不加 <code>www</code> 无所谓。而 &ldquo;ANSWER&rdquo;（回答）就写服务器的 IP 地址（可以在服务器商那里看到）。填好之后添加记录，OK，目前关于域名要做的就这么多。</p>
+<h2 id="网站系统">网站系统</h2>
+<p>网站系统，或者在我们这里更具体一些，博客系统。它控制网站的界面展示，用户和网站的交互，网站数据的存取等。</p>
+<h3 id="网站系统的选取">网站系统的选取</h3>
+<p>本站（之前）用的网站系统是 WordPress。</p>
+<p>还有一个常用的是 typecho。我只听说过，下述对比也只是综合我所看到的评价。</p>
+<blockquote>
+<p>相对而言 WordPress 的功能更丰富，不过没有原生 markdown 支持。typecho 定位是纯粹的个人博客系统，而非 wordpress 这样的 CMS，所以相对来说更简洁一些。如果服务器配置不够，也许可以试试 typecho。</p>
+</blockquote>
+<blockquote>
+<p>此外，推广一波 TriNitroTofu 大佬自己写的博客系统，<a
+  href="https://github.com/trinitrotofu/December"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>December</a></p>
+</blockquote>
+<p>我们这里选用 wordpress，不过在此之前还需要先对服务器进行一些操作，让它更好用一些。</p>
+<h3 id="连接服务器以及宝塔-linux-面板的使用">连接服务器以及宝塔 Linux 面板的使用</h3>
+<p>购买好服务器之后，除了得到一个光秃秃的 IP 地址和后台的一些资源使用情况，我们所能做的最多其实也就是开机、关机、重启之类的。</p>
+<p>所以需要想办法先连接上服务器，我们采用 SSH 连接的方式。</p>
+<p>Windows 下需要用到一个叫做 PuTTY 的软件。这是<a
+  href="https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>官网下载地址</a>。</p>
+<p>
+</p>
+<p>启动后，在上面的红框 1 中输入服务器的 IP 地址，然后在左侧找到红框 2 中的 <code>Auth</code>（依次点击 <code>Connection-&gt;SSH-&gt;Auth</code>）。</p>
+<p>然后点击红框 3 中，找到之前保存的服务商给你的服务器的私钥文件。</p>
+<p>接着就可以点击 <code>open</code> 进行连接。</p>
+<blockquote>
+<p>PuTTY 似乎不会默认为你记住当前的配置，你下一次打开还需要再输一遍 IP，再选一遍私钥。解决方法是在首页 <code>Session</code> 那里的 <code>Saved Sessions</code> 给当前会话取个名，然后点右边的 <code>save</code> 保存，下次就可以双击会话名，或者点击 <code>load</code> 后再打开了。</p>
+</blockquote>
+<p>打开后就是一个命令行界面。它询问 <code>login as</code>，输入 <code>root</code> 回车即可。现在你就正式登录到服务器上了，你可以在命令行中通过命令操作服务器里的系统。</p>
+<p>接下来安装宝塔 Linux 面板。</p>
+<blockquote>
+<p>Linux 面板用于提供一个方便的界面，以可视化地管理服务器。宝塔面板还有很多关于网站维护的工具，非常好用。</p>
+</blockquote>
+<p>在命令行中输入 <code>wget -O install.sh http://download.bt.cn/install/install-ubuntu_6.0.sh &amp;&amp; sudo bash install.sh</code>。</p>
+<p>等到服务器处理完之后，注意它应该会输出一些内容，像是外网面板地址、内网面板地址、初始默认用户密码之类的。将面板地址复制到浏览器打开（哪个能用用哪个），输入命令行里提供的用户名和密码。然后就能看到一个面板页面。</p>
+<blockquote>
+<p>如果不慎关闭了命令行也没关系。重新打开命令行，在其中输入 <code>bt</code> 命令，会有中文的提示指引，输入编号选择查看默认信息即可。</p>
+</blockquote>
+<p>第一次进入面板，它应该会提示你安装一堆东西，像什么 Apache、mysql、php 之类的。根据 WordPress 的建议，mysql 版本最好选用 5.6+，php 版本最好选用 7.4（之后再更新也是可以的）。安装这些会花很长一段时间，慢慢等待即可。</p>
+<p>然后需要将你的网站添加到宝塔面板上，在面板的左侧的“网站”里添加网站即可。记得 FTP、数据库都选创建，PHP 版本选到 7.4 及以上即可。这一步比较简单，不再赘述。</p>
+<blockquote>
+<p>另外，在这一个界面上可以给网站配置 SSL 证书，最好打开强制 HTTPS。另外建议把面板的 SSL 也开了，在面板的设置里面就有。不过开了之后浏览器可能反而告诉你站点不安全，甚至有可能拦截你。我们不管它就好。</p>
+</blockquote>
+<h3 id="wordpress-的安装">wordpress 的安装</h3>
+<p>这个参考<a href="https://blog.naibabiji.com/tutorial/bao-ta-an-zhuang-wordpress.html" target="_blank" rel="noopener">这篇教程</a>即可，写得很详细了。</p>
+<h2 id="总结">总结</h2>
+<p>完成上面这些步骤，就可以在浏览器里通过域名访问网页了。你将会看到 wordpress 默认主题下的首页。</p>
+<p>撒花庆祝ヾ(≧▽≦*)o。</p>
+<p>如果有什么疑问的话请在评论说明，我会尽我所能解答的。</p>
+<blockquote>
+<p>版权声明：本文采用 <a
+  href="http://creativecommons.org/licenses/by/4.0/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>CC BY 4.0</a> 进行许可，转载请注明出处。</p>
+<p>本文链接：<a
+  href="https://cxz888.xyz/posts/blog_site_note_1/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>https://cxz888.xyz/posts/blog_site_note_1/</a></p>
+</blockquote>]]></description>
+</item></channel>
+</rss>

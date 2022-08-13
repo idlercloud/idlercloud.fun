@@ -1,0 +1,218 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <title>Rust - 标签 - 主页</title>
+    <link>http://blog.cxz888.xyz/tags/rust/</link>
+    <description>Rust - 标签 - 主页</description>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 21:02:21 &#43;0800</lastBuildDate><atom:link href="http://blog.cxz888.xyz/tags/rust/" rel="self" type="application/rss+xml" /><item>
+  <title>使用 WSL2 时碰到的小问题</title>
+  <link>http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</link>
+  <pubDate>Thu, 11 Aug 2022 21:02:21 &#43;0800</pubDate>
+  <author>cxz888</author>
+  <guid>http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</guid>
+  <description><![CDATA[<p>写这篇博客时，我因为 CS110L 的作业要求必须安装 Linux 环境。几番周折最后选择了 Windows 下的 WSL2。现在看来很不错。</p>
+<p>过程中也遇到一些小坑：</p>
+<ol>
+<li>磁盘占用问题，<code>wsl --install</code>默认安装在 C 盘</li>
+<li>代理问题 &ldquo;# Failed to establish a socket connection to proxies: [&ldquo;PROXY XXX.XXX.XXX.XXX:7890&rdquo;]&rdquo;</li>
+<li>换源问题，源和系统版本不一致导致升级的包不对</li>
+<li>Rust 编译报错&quot;/usr/bin/ld: cannot find Scrt1.o: No such file or directory&quot;</li>
+</ol>
+<p>下面一一详细记录了问题和解决方案，参考了很多网上的方法，都附了链接。</p>
+<h2 id="磁盘占用问题">磁盘占用问题</h2>
+<p>安装 WSL2，刚开始我用的是微软文档里写的方法，直接在命令行里<code>wsl --install</code>。后来我忽然意识到，这样安装的系统默认是在 C 盘的。而我的 C 盘早都红了，只留下 7、8 个 G 的样子。考虑到未来的使用恐怕是不足够的。</p>
+<p>好嘛，只好先卸载 WSL 了。准确来说是卸载 WSL 里面安装好的 Linux 发行版。这个找网上教程即可。</p>
+<blockquote>
+<p>顺便一提，如果不用<code>wsl --install</code>，按照网上找到的教程，你需要手动去控制面板打开 Windows 的 WSL 选项。重启后再去手动下载 ubuntu 发行版。<code>wsl --install</code>应该是帮你把这两步都做了，但是还是需要重启的，它会在重启后才安装 Linux 发行版。</p>
+</blockquote>
+<p>想要自定义安装路径，就需要手动下载 ubuntu 安装包，在<a
+  href="https://docs.microsoft.com/zh-cn/windows/wsl/install-manual"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>微软 WSL2 文档</a> 中查看发行版列表。如下</p>
+<p></p>
+<p>如果本文附带的链接失效了，你可以自己去搜索微软的 WSL2 文档。</p>
+<p>点击上图中你想要的发行版，就会开始下载。另外提一句，最上面的 Ubuntu 似乎是 20.04 版本的，不知道它和下面的 Ubuntu 20.04 有什么区别。</p>
+<p>下载好的文件大概是这个样子。</p>
+<p></p>
+<p>直接运行它会直接通过 Microsoft Store 安装，不过我们不这么做（因为可能改不了路径）。我们把它当作压缩文件打开，比如改后缀打开，或者右键、打开方式里选压缩软件打开。内容大致如下。</p>
+<p></p>
+<p>里面有很多东西，不过比较大的就一个 x64 结尾，一个 ARM64 结尾。根据架构自行选择即可。</p>
+<p>把这个 <code>.appx</code> 文件当作压缩文件解压。如果不行，就先把它后缀的改成 <code>.zip</code> 再解压。解压的目标位置就是你希望 Linux 发行版安装的位置。</p>
+<p>现在你应该得到了一堆文件，其中应该有一个很显眼的 <code>ubuntu.exe</code>。运行它，等待安装就可以了。最后它可能会生成一个 <code>.vhdx</code> 文件，这应该就是你的 Linux 发行版系统内部所有文件的存储位置了（所以其它文件可以删了）。</p>
+<p>最后，在命令行输入 <code>wsl</code>，就可以启动 Linux 系统啦。</p>
+<p>参考文章：<a
+  href="https://zhuanlan.zhihu.com/p/263089007?ivk_sa=1024320u"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>自定义 WSL 的安装位置，别再装到 C 盘啦</a></p>
+<h2 id="代理问题">代理问题</h2>
+<p>如果你挂了梯子，那么可能在 WSL 里遇到问题。你可能会看到类似于 <code># Failed to establish a socket connection to proxies: [&quot;PROXY XXX.XXX.XXX.XXX:XXXX&quot;]</code> 这样的错误。而且你会发现，在 Windows 上能访问 Google 等网站，在 WSL 上用 <code>wget</code> 等命令就无法访问。</p>
+<p>此时可以先去 powershell（注意在宿主机，也就是 Windows 上）执行 <code>ipconfig</code> 查看 WSL 的 IPv4 地址。类似于下图</p>
+<p></p>
+<p>假设你查询到的 IP 地址是 XXX.XXX.XXX.XXX，那么就在 WSL 上修改 <code>http_proxy</code> 和 <code>https_proxy</code> 这两个环境变量。比如用<code>export</code>命令。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&#34;http://XXX.XXX.XXX.XXX:PORT&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">export</span> <span class="nv">https_proxy</span><span class="o">=</span><span class="s2">&#34;http://XXX.XXX.XXX.XXX:PORT&#34;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>其中 PORT 是你的代理软件开放的 LAN 端口，对于 clash 而言是 7890。（2022/8/11 时）</p>
+<p>注意 <code>https_proxy</code> 的值不需要是 <code>https</code>，否则未来很可能在使用 <code>curl</code> 时出现 OpenSSL 错误。</p>
+<p>这个命令是每次打开 WSL 都要输的，你可以用别名来简化流程，也可以设置 /etc/profile 文件来一劳永逸。</p>
+<p>而且你还需要打开你代理软件的“允许 LAN”的选项。如果你用的是 Clash for Windows，就是首页的那个 Allow LAN。</p>
+<p>如果现在还不行，有可能是防火墙的问题，在控制面板-&gt;系统和安全-&gt;Windows Defender 防火墙-&gt;允许应用通过 Window 防火墙中，把你的代理软件的相关项全部打上勾。</p>
+<p>现在在 WSL 里应该也可以访问 Google 了。</p>
+<p>如果某一天你发现 WSL 里面代理又不好使了，可以重新在 Windows 下输入 <code>ipconfig</code> 查看 WSL 的 IP 地址。这个地址不是固定的，有可能变化。</p>
+<p>参考博客：<a
+  href="https://blog.lishunyang.com/2021/02/wsl2-dev-env.html"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>WSL 开发环境的坑（不定期更新）</a></p>
+<h2 id="换源问题">换源问题</h2>
+<p>换源也不是随便换的。</p>
+<p>首先用命令 <code>lsb_release -a</code>，查看自己的发行版本和代号。</p>
+<p>比如我用的这个是 ubuntu 20.04 代号为 <code>focal</code>。</p>
+<p>那么相应的，换源时就得注意这个代号。</p>
+<p>首先用 <code>sudo vim /etc/apt/sources.list</code> 打开文件（如果你不会使用 vim 就用别的文本编辑器）</p>
+<p>然后删除原来的内容，输入</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#阿里源
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+</span></span><span class="line"><span class="cl">deb-src http://mirrors.aliyun.com/ubuntu/ focal-proposed main restricted universe multiverse
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意看，其中有 <code>focal</code> 这个代号，一定要和自己版本的代号一致。</p>
+<p>换完源之后别忘了</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-powershell" data-lang="powershell"><span class="line"><span class="cl"><span class="n">sudo</span> <span class="nb">apt-get</span> <span class="n">update</span>    <span class="c"># 更新源</span>
+</span></span><span class="line"><span class="cl"><span class="n">sudo</span> <span class="nb">apt-get</span> <span class="n">upgrade</span>   <span class="c"># 更新软件包</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>参考博客：<a
+  href="https://blog.csdn.net/WU2629409421perfect/article/details/110881141"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Ubuntu 20.04 &amp;&amp; Ubuntu 18.04 修改 apt 源</a></p>
+<h2 id="rust-编译报错">rust 编译报错</h2>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">/usr/bin/ld: cannot find Scrt1.o: No such file or directory
+</span></span><span class="line"><span class="cl">/usr/bin/ld: cannot find crti.o: No such file or directory
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个可能是因为我刚开始换源没换对引发的错误。</p>
+<p>总之如果你出现这个问题，可以尝试按上面操作换到正确的源上，然后更新一下试试。</p>
+<p>如果不行的话，再使用 <code>sudo apt-get install libc6-dev</code> 安装软件包。这样应该能解决问题了。</p>
+<p><a
+  href="https://blog.csdn.net/weixin_42255281/article/details/110820663"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>usr/bin/ld: cannot find crti.o: No such file or directory</a></p>
+<h2 id="总结">总结</h2>
+<p>WSL2 要占用不少内存，不过使用起来体验比 VMWare 要好很多。如果你不是很在乎图形界面的话，那么推荐可以尝试一下。（其实也有在 WSL2 中使用 GUI 的方法，不过似乎要 Win11）</p>
+<blockquote>
+<p>版权声明：本文采用 <a
+  href="http://creativecommons.org/licenses/by/4.0/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>CC BY 4.0</a> 进行许可，转载请注明出处。</p>
+<p>本文链接：<a
+  href="http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/"
+  
+  
+  
+  
+  
+>http://blog.cxz888.xyz/posts/tech/wsl_rust_tips/</a></p>
+</blockquote>]]></description>
+</item></channel>
+</rss>

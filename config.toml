@@ -1,0 +1,136 @@
+baseURL = "http://blog.cxz888.xyz"
+# [en, zh-cn, fr, ...] 设置默认的语言
+defaultContentLanguage = "zh-cn"
+# 网站语言，仅在这里 CN 大写
+languageCode = "zh-CN"
+# 是否包括中日韩文字
+hasCJKLanguage = true
+# 网站标题
+title = "主页"
+timeZone = "Asia/Shanghai"
+publishDir = "docs"
+
+# 更改使用 Hugo 构建网站时使用的默认主题
+theme = "FixIt"
+
+[params]
+# FixIt 主题版本
+version = "0.2.X"
+[params.page]
+rssFullText = true
+[params.math]
+enable = true
+[params.home.profile]
+enable = true
+# Gravatar 邮箱，用于优先在主页显示的头像
+gravatarEmail = ""
+# 主页显示头像的 URL
+avatarURL = "/images/avatar.png"
+# 主页显示的网站标题 (支持 HTML 格式)
+title = "闲云"
+# 主页显示的网站副标题
+subtitle = "在互联网的小角落里，慢慢学习和生活"
+# 是否为副标题显示打字机动画
+typeit = false
+# 是否显示社交账号
+social = true
+# 免责声明 (支持 HTML 格式)
+disclaimer = ""
+# 主页文章列表
+[params.home.posts]
+enable = true
+# 主页每页显示文章数量
+paginate = 6
+[params.header.title]
+# URL of the LOGO
+# LOGO 的 URL
+logo = "/images/cloud.png"
+# title name
+# 标题名称
+name = "闲云的博客"
+# you can add extra information before the name (HTML format is supported), such as icons
+# 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
+pre = ""
+# you can add extra information after the name (HTML format is supported), such as icons
+# 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
+post = ""
+# whether to use typeit animation for title name
+# 是否为标题显示打字机动画
+typeit = false
+[params.gravatar]
+# Gravatar 主机，默认：“www.gravatar.com”
+host = "gravatar.loli.net"
+style = "mp"               # "", mp, identicon, monsterid, wavatar, retro, blank, robohash
+
+[menu]
+[[menu.main]]
+identifier = "posts"
+# 你可以在名称（允许 HTML 格式）之前添加其他信息，例如图标
+pre = ""
+# 你可以在名称（允许 HTML 格式）之后添加其他信息，例如图标
+post = ""
+name = "文章"
+url = "/posts/"
+# 当你将鼠标悬停在此菜单链接上时，将显示的标题
+title = ""
+weight = 1
+[[menu.main]]
+identifier = "categories"
+pre = ""
+post = ""
+name = "分类"
+url = "/categories/"
+title = ""
+weight = 2
+[[menu.main]]
+identifier = "tags"
+pre = ""
+post = ""
+name = "标签"
+url = "/tags/"
+title = ""
+weight = 3
+[[menu.main]]
+identifier = "about"
+pre = "<i class='fa-solid fa-info-circle fa-fw fa-sm'></i>"
+post = ""
+name = "关于"
+url = "/about/"
+title = ""
+weight = 7
+[[menu.main]]
+identifier = "friends"
+pre = "<i class='fa-solid fa-users fa-fw fa-sm'></i>"
+post = ""
+name = "友链"
+url = "/friends/"
+title = "友情链接"
+weight = 6
+
+# Hugo 解析文档的配置
+[markup]
+# 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
+[markup.highlight]
+anchorLineNos = false
+codeFences = true
+guessSyntax = true
+hl_Lines = ""
+lineAnchors = ""
+lineNoStart = 1
+lineNos = true
+lineNumbersInTable = true
+tabWidth = 4
+# false 是必要的设置 (https://github.com/hugo-fixit/FixIt/issues/43)
+noClasses = false
+[markup.goldmark]
+[markup.goldmark.renderer]
+# 允许在 md 中内嵌 html
+unsafe = true
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+page = ["HTML", "MarkDown"]
+section = ["HTML", "RSS"]
+taxonomy = ["HTML", "RSS"]
+taxonomyTerm = ["HTML"]
+timeZone = "Asia/Shanghai"
