@@ -2,6 +2,7 @@
 title: "关于"
 date: 2022-08-09T21:27:42+08:00
 draft: false
+comment: false
 ---
 
 ## 我

@@ -68,6 +68,9 @@ enable = true
 permalink = "https://github.com/cxz888/cxz888.xyz"
 title = ""
 position = "right"
+
+[params.page.comment]
+enable = true
 [params.page.comment.giscus]
 enable = true
 repo = "cxz888/cxz888.xyz"
