@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>推荐 - 标签 - 主页</title>
+    <title>推荐 - 标签 - 闲云的博客</title>
     <link>http://cxz888.xyz/tags/%E6%8E%A8%E8%8D%90/</link>
-    <description>推荐 - 标签 - 主页</description>
+    <description>推荐 - 标签 - 闲云的博客</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 17:20:02 &#43;0800</lastBuildDate><atom:link href="http://cxz888.xyz/tags/%E6%8E%A8%E8%8D%90/" rel="self" type="application/rss+xml" /><item>
   <title>「工具推荐——软件」1.WGestures：鼠标手势</title>
   <link>http://cxz888.xyz/posts/tech/recommand_tool_wgestures/</link>

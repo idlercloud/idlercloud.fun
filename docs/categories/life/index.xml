@@ -1,8 +1,8 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
-    <title>生活 - 分类 - 主页</title>
+    <title>生活 - 分类 - 闲云的博客</title>
     <link>http://cxz888.xyz/categories/life/</link>
-    <description>生活 - 分类 - 主页</description>
+    <description>生活 - 分类 - 闲云的博客</description>
     <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><atom:link href="http://cxz888.xyz/categories/life/" rel="self" type="application/rss+xml" /><item>
   <title> 数电实验验收，关于内卷</title>
   <link>http://cxz888.xyz/posts/life/thought_about_involution/</link>

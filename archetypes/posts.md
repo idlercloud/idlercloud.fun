@@ -28,7 +28,7 @@ resources:
   src: featured-image-preview.jpg
 
 toc:
-  enable: true
+  auto: false
 math:
   enable: false
 lightgallery: false
