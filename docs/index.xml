@@ -258,6 +258,10 @@
   
   
 ><code>Weak</code></a>。</p>
+<blockquote>
+<p>其实不是用弱引用也是可以的，只需要手动实现 <code>Drop</code> trait，在析构时手动解除引用即可——<code>Rc</code> 循环引用的问题在于它不是自动析构的</p>
+<p>另外提一点，递归结构的默认析构可能会导致递归析构，因而栈溢出。为了避免这种情况也可以手动实现 <code>Drop</code></p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -490,6 +494,51 @@
 <p>其实除去这些之外，还有一个终极方案是 <code>unsafe</code>。事实上我个人觉得这种底层数据结构才是 <code>unsafe</code> 大展拳脚的地方。更上层的领域中所有权和借用等概念则是很好的帮手。因为 <code>unsafe</code> 有许多需要注意的点，我本人也没有太深入接触过，因此这里就不详细写了。</p>
 <p>面对 <code>unsafe</code> 的一个基本态度是：先假定 safe 可以解决问题，待到实在不可行时才考虑 <code>unsafe</code>。</p>
 <p>感谢阅读。</p>
+<blockquote>
+<p>2022/10/9 更新：</p>
+<p>前段时间看了 <a
+  href="https://rust-unofficial.github.io/too-many-lists/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Too Many List</a> 这本书，颇为相见恨晚。作者深入浅出地解析了 Rust 中链表的各种写法，最终实现了一个生产级别的 Unsafe 双向链表。</p>
+<p>无论是作为 Unsafe Rust 的入门书还是解决树形结构问题都是很好的参考书籍，推荐阅读。当然，也有些体会到 Unsafe 代码写起来战战兢兢的感觉，还是 Safe Rust 舒适 :D</p>
+<p>另外，我在 <a
+  href="https://crates.io"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>crates.io</a> 上发现了 <a
+  href="https://crates.io/crates/slab"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>slab</a> 这个库，感觉可以一定程度上作为 Arena 方案来使用。</p>
+</blockquote>
 <blockquote>
 <p>版权声明：本文采用 <a
   href="http://creativecommons.org/licenses/by/4.0/"

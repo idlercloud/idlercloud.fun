@@ -190,6 +190,10 @@ println!("{:?}", l1);
 
 为了避免这个问题，需要使用弱引用 [`Weak`](https://doc.rust-lang.org/std/rc/struct.Weak.html)。
 
+> 其实不是用弱引用也是可以的，只需要手动实现 `Drop` trait，在析构时手动解除引用即可——`Rc` 循环引用的问题在于它不是自动析构的
+>
+> 另外提一点，递归结构的默认析构可能会导致递归析构，因而栈溢出。为了避免这种情况也可以手动实现 `Drop`
+
 ```rust
 // 为了方便起个短的别名
 type Parent = Weak<RefCell<Item>>;
@@ -335,6 +339,14 @@ fn look_for(&self, curr: usize, name: &str) -> Option<usize> {
 面对 `unsafe` 的一个基本态度是：先假定 safe 可以解决问题，待到实在不可行时才考虑 `unsafe`。
 
 感谢阅读。
+
+> 2022/10/9 更新：
+>
+> 前段时间看了 [Too Many List](https://rust-unofficial.github.io/too-many-lists/) 这本书，颇为相见恨晚。作者深入浅出地解析了 Rust 中链表的各种写法，最终实现了一个生产级别的 Unsafe 双向链表。
+>
+> 无论是作为 Unsafe Rust 的入门书还是解决树形结构问题都是很好的参考书籍，推荐阅读。当然，也有些体会到 Unsafe 代码写起来战战兢兢的感觉，还是 Safe Rust 舒适 :D
+>
+> 另外，我在 [crates.io](https://crates.io) 上发现了 [slab](https://crates.io/crates/slab) 这个库，感觉可以一定程度上作为 Arena 方案来使用。
 
 > 版权声明：本文采用 [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/) 进行许可，转载请注明出处。
 >
