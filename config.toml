@@ -6,20 +6,29 @@ languageCode = "zh-CN"
 # 是否包括中日韩文字
 hasCJKLanguage = true
 # 网站标题
-title = "闲云的博客"
-timeZone = "Asia/Shanghai"
-publishDir = "docs"
 enableGitInfo = true
+publishDir = "docs"
+timeZone = "Asia/Shanghai"
+title = "闲云的博客"
 
 # 更改使用 Hugo 构建网站时使用的默认主题
 theme = "FixIt"
 
 [params]
 # FixIt 主题版本
-version = "0.2.X"
 gitRepo = "https://github.com/cxz888/cxz888.xyz"
-[params.page]
-rssFullText = true
+version = "0.2.X"
+  [params.page]
+  rssFullText = true
+    [params.page.toc]
+    # 是否使用目录
+    enable = true
+    # FixIt 0.2.9 | 新增 是否保持使用文章前面的静态目录
+    keepStatic = false
+    # 是否使侧边目录自动折叠展开
+    auto = true
+    # FixIt 0.2.13 | 新增 目录位置 ("left", "right")
+    position = "right"
 [params.math]
 enable = true
 [params.home.profile]
@@ -66,107 +75,107 @@ style = "mp"
 [params.githubCorner]
 enable = true
 permalink = "https://github.com/cxz888/cxz888.xyz"
-title = ""
 position = "right"
+title = ""
 
 [params.page.comment]
 enable = true
-[params.page.comment.giscus]
-enable = true
-repo = "cxz888/cxz888.xyz"
-repoId = "R_kgDOHz_lZg"
-category = "Comments"
-categoryId = "DIC_kwDOHz_lZs4CQ12M"
-mapping = "og:title"
-term = ""
-reactionsEnabled = "1"
-emitMetadata = "0"
-inputPosition = "bottom"            # top, bottom
-lightTheme = "light"
-darkTheme = "dark_dimmed"
-lazyLoad = true
+  [params.page.comment.giscus]
+  category = "Comments"
+  categoryId = "DIC_kwDOHz_lZs4CQ12M"
+  darkTheme = "dark_dimmed"
+  emitMetadata = "0"
+  enable = true
+  inputPosition = "bottom" # top, bottom
+  lazyLoad = true
+  lightTheme = "light"
+  mapping = "og:title"
+  reactionsEnabled = "1"
+  repo = "cxz888/cxz888.xyz"
+  repoId = "R_kgDOHz_lZg"
+  term = ""
 
 [menu]
-[[menu.main]]
-identifier = "posts"
-# 你可以在名称（允许 HTML 格式）之前添加其他信息，例如图标
-pre = ""
-# 你可以在名称（允许 HTML 格式）之后添加其他信息，例如图标
-post = ""
-name = "文章"
-url = "/posts/"
-# 当你将鼠标悬停在此菜单链接上时，将显示的标题
-title = ""
-weight = 1
-[[menu.main]]
-identifier = "categories"
-pre = ""
-post = ""
-name = "分类"
-url = "/categories/"
-title = ""
-weight = 2
-[[menu.main]]
-identifier = "tags"
-pre = ""
-post = ""
-name = "标签"
-url = "/tags/"
-title = ""
-weight = 3
-[[menu.main]]
-identifier = "about"
-pre = "<i class='fa-solid fa-info-circle fa-fw fa-sm'></i>"
-post = ""
-name = "关于"
-url = "/about/"
-title = ""
-weight = 7
-[[menu.main]]
-identifier = "friends"
-pre = "<i class='fa-solid fa-users fa-fw fa-sm'></i>"
-post = ""
-name = "友链"
-url = "/friends/"
-title = "友情链接"
-weight = 6
-[[menu.main]]
-identifier = "github"
-pre = "<i class='fa-brands fa-github fa-fw'></i>"
-post = ""
-name = ""
-url = "https://github.com/cxz888/cxz888.xyz"
-title = "GitHub"
-weight = ""
-[menu.main.params]
-class = "d-none-desktop text-center"
+  [[menu.main]]
+  identifier = "posts"
+  # 你可以在名称（允许 HTML 格式）之前添加其他信息，例如图标
+  pre = ""
+  # 你可以在名称（允许 HTML 格式）之后添加其他信息，例如图标
+  name = "文章"
+  post = ""
+  url = "/posts/"
+  # 当你将鼠标悬停在此菜单链接上时，将显示的标题
+  title = ""
+  weight = 1
+  [[menu.main]]
+  identifier = "categories"
+  name = "分类"
+  post = ""
+  pre = ""
+  title = ""
+  url = "/categories/"
+  weight = 2
+  [[menu.main]]
+  identifier = "tags"
+  name = "标签"
+  post = ""
+  pre = ""
+  title = ""
+  url = "/tags/"
+  weight = 3
+  [[menu.main]]
+  identifier = "about"
+  name = "关于"
+  post = ""
+  pre = "<i class='fa-solid fa-info-circle fa-fw fa-sm'></i>"
+  title = ""
+  url = "/about/"
+  weight = 7
+  [[menu.main]]
+  identifier = "friends"
+  name = "友链"
+  post = ""
+  pre = "<i class='fa-solid fa-users fa-fw fa-sm'></i>"
+  title = "友情链接"
+  url = "/friends/"
+  weight = 6
+  [[menu.main]]
+  identifier = "github"
+  name = ""
+  post = ""
+  pre = "<i class='fa-brands fa-github fa-fw'></i>"
+  title = "GitHub"
+  url = "https://github.com/cxz888/cxz888.xyz"
+  weight = ""
+    [menu.main.params]
+    class = "d-none-desktop text-center"
 # Hugo 解析文档的配置
 [markup]
-# 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
-[markup.highlight]
-anchorLineNos = false
-codeFences = true
-guessSyntax = true
-hl_Lines = ""
-lineAnchors = ""
-lineNoStart = 1
-lineNos = true
-lineNumbersInTable = true
-tabWidth = 4
-# false 是必要的设置 (https://github.com/hugo-fixit/FixIt/issues/43)
-noClasses = false
-[markup.goldmark]
-[markup.goldmark.renderer]
-# 允许在 md 中内嵌 html
-unsafe = true
+  # 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+  anchorLineNos = false
+  codeFences = true
+  guessSyntax = true
+  hl_Lines = ""
+  lineAnchors = ""
+  lineNoStart = 1
+  lineNos = true
+  lineNumbersInTable = true
+  tabWidth = 4
+  # false 是必要的设置 (https://github.com/hugo-fixit/FixIt/issues/43)
+  noClasses = false
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+    # 允许在 md 中内嵌 html
+    unsafe = true
 
 [frontmatter]
-lastmod = [':git', 'lastmod', ':fileModTime', ':default']
+lastmod = [ ':git', 'lastmod', ':fileModTime', ':default' ]
 
 [outputs]
-home = ["HTML", "RSS", "JSON"]
-page = ["HTML", "MarkDown"]
-section = ["HTML", "RSS"]
-taxonomy = ["HTML", "RSS"]
-taxonomyTerm = ["HTML"]
+home = [ "HTML", "RSS", "JSON" ]
+page = [ "HTML", "MarkDown" ]
+section = [ "HTML", "RSS" ]
+taxonomy = [ "HTML", "RSS" ]
+taxonomyTerm = [ "HTML" ]
 timeZone = "Asia/Shanghai"
