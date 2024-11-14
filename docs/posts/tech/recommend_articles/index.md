@@ -53,6 +53,9 @@
 
 ## 精品文章
 
+- [Parse, don’t validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
+  - 提倡类型驱动设计的文章，非常值得一看
+  - 尽管代码示例是用 haskell 写的，核心思想还是通用的
 - [Semantic Versioning Will Not Save You](https://hynek.me/articles/semver-will-not-save-you/)
   - 作者认为：依赖于 SemVer 会伤害用户
   - 有一定道理。读一读可以更多思考项目、依赖、开源库之间的复杂关系
@@ -90,6 +93,13 @@
   - 和类型「大小」相关的概念。比如 `Sized` trait，dynamically sized types(DST)，zero sized types(ZST)
   - 对于系统编程语言（主要指 C/C++/Rust 等，一般无 GC）而言，类型的大小是一个非常基本的限制，会影响到语言设计的方方面面，也是这类语言复杂性的一个常见来源
   - 因此这篇文章虽然主要是关于 Rust 的，但是对 C/C++ 的理解也可以有一定启发作用
+
+## 书籍教程
+
+- [Crafting Interpreters](https://www.craftinginterpreters.com/contents.html)
+  - 实践编译原理知识的绝佳好书，同时也是练习工程开发的很好材料
+  - 真正地在教学工业界使用的技术，也会适当扩展各种语言实现的趣闻、语言设计的思考等
+  - 虽然实现语言是 java 和 c，但原理相通
 
 ## 博客/时事通讯/播客推荐
 
