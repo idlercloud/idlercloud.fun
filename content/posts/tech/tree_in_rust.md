@@ -3,8 +3,8 @@ title: "在 Rust 中表征树形结构"
 subtitle: ""
 date: 2022-08-14T23:42:42+08:00
 draft: false
-author: "cxz888"
-authorLink: "https://cxz888.xyz"
+author: "idlercloud"
+authorLink: "https://idlercloud.fun"
 authorEmail: "idlercloud@gmail.com"
 description: ""
 keywords: ""

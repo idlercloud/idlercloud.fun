@@ -3,8 +3,8 @@ title: "Linux 通过 gogs 或 gitea 自建 Git 服务"
 subtitle: ""
 date: 2022-08-11T22:09:03+08:00
 draft: false
-author: "cxz888"
-authorLink: "https://cxz888.xyz"
+author: "idlercloud"
+authorLink: "https://idlercloud.fun"
 authorEmail: "idlercloud@gmail.com"
 description: ""
 keywords: ""
@@ -128,7 +128,7 @@ gogs 的一些设置可以在 `数据目录/gogs/conf/app.ini` 修改，如：
 
 git 这个用户不行的话，就用 `sudo adduser` 另外创建用户，比如 `sudo adduser gogs`。按照指示完成创建，最后用 `su gogs` 切换过去即可。
 
-cd 到二进制文件所在的目录，如果直接执行 `./gogs web` 可能显示权限不足，那么就先 `chmod +x gogs`。如果是用 SQLite3 的话，为了后续能创建数据库，这里还要进行一下 `chown gogs:gogs /www/wwwroot/repo.cxz888.xyz` 把目录的权限赋予给当前用户。
+cd 到二进制文件所在的目录，如果直接执行 `./gogs web` 可能显示权限不足，那么就先 `chmod +x gogs`。如果是用 SQLite3 的话，为了后续能创建数据库，这里还要进行一下 `chown gogs:gogs /www/wwwroot/repo.idlercloud.fun` 把目录的权限赋予给当前用户。
 
 剩下的就和 docker 差不多了，不过最后 ssh clone 地址是 `gogs@xxxx`。
 
@@ -175,11 +175,11 @@ gitea 是 2016 年的时候从 gogs 项目中 fork 出来的。
 
 所以应当通过映射来使用域名直接访问。
 
-可以参考我的[「个人博客建站笔记」1.网站建成](http://blog.cxz888.xyz/posts/blog_site_note_1/)中域名解析的部分。
+可以参考我的[「个人博客建站笔记」1.网站建成](http://idlercloud.fun/posts/blog_site_note_1/)中域名解析的部分。
 
-在你的域名服务上提供的 DNS 解析里添加 A 记录。比如我是将 `repo.cxz888.xyz` 解析到自己的服务器 IP。
+在你的域名服务上提供的 DNS 解析里添加 A 记录。比如我是将 `repo.idlercloud.fun` 解析到自己的服务器 IP。
 
-DNS 解析对端口是一无所知的，所以现在得通过 `repo.cxz888.xyz:端口号` 来访问 git 服务，还是比较丑。
+DNS 解析对端口是一无所知的，所以现在得通过 `repo.idlercloud.fun:端口号` 来访问 git 服务，还是比较丑。
 
 下一步就是通过宝塔的反向代理来解析端口。如果你不是用宝塔，那么可以根据你使用的 web 服务器软件，如 nginx、apache，去百度或谷歌搜索反向代理的方法。
 

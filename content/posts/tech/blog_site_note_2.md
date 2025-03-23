@@ -3,8 +3,8 @@ title: "「个人博客建站笔记」2.网站的布局"
 subtitle: ""
 date: 2022-08-11T11:21:45+08:00
 draft: false
-author: "cxz888"
-authorLink: "https://cxz888.xyz"
+author: "idlercloud"
+authorLink: "https://idlercloud.fun"
 authorEmail: "idlercloud@gmail.com"
 description: ""
 keywords: ""
@@ -46,9 +46,9 @@ repost:
 
 <!--more-->
 
--   涉及内容：网站后台、主题、PHP、HTML、CSS。
--   面向人群：新手。
--   前置知识：WordPress 网站的搭建（见[「个人博客建站笔记」——1.网站建成](https://cxz888.xyz/posts/blog_site_note_1)）。
+- 涉及内容：网站后台、主题、PHP、HTML、CSS。
+- 面向人群：新手。
+- 前置知识：WordPress 网站的搭建（见[「个人博客建站笔记」——1.网站建成](https://idlercloud.fun/posts/blog_site_note_1)）。
 
 ## 网站后台
 
@@ -268,4 +268,4 @@ function auto_redirect_after_logout(){
 
 > 版权声明：本文采用 [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/) 进行许可，转载请注明出处。
 >
-> 本文链接：[https://cxz888.xyz/posts/blog_site_note_2/](https://cxz888.xyz/posts/blog_site_note_2/)
+> 本文链接：[https://idlercloud.fun/posts/blog_site_note_2/](https://idlercloud.fun/posts/blog_site_note_2/)

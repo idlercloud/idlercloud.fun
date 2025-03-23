@@ -3,8 +3,8 @@ title: "最长公共子序列 (LCS) 在 diff 命令中的应用——Myers 算�
 subtitle: ""
 date: 2022-08-11T18:52:26+08:00
 draft: false
-author: "cxz888"
-authorLink: "https://cxz888.xyz"
+author: "idlercloud"
+authorLink: "https://idlercloud.fun"
 authorEmail: "idlercloud@gmail.com"
 description: ""
 keywords: ""

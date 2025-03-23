@@ -3,8 +3,8 @@ title: "「工具推荐——软件」1.WGestures：鼠标手势"
 subtitle: ""
 date: 2022-08-11T17:20:02+08:00
 draft: false
-author: "cxz888"
-authorLink: "https://cxz888.xyz"
+author: "idlercloud"
+authorLink: "https://idlercloud.fun"
 authorEmail: "idlercloud@gmail.com"
 description: ""
 keywords: ""

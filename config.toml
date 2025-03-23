@@ -1,4 +1,4 @@
-baseURL = "http://cxz888.xyz"
+baseURL = "http://idlercloud.xyz"
 # [en, zh-cn, fr, ...] 设置默认的语言
 defaultContentLanguage = "zh-cn"
 # 网站语言，仅在这里 CN 大写
@@ -15,7 +15,7 @@ title = "闲云的博客"
 theme = "FixIt"
 
 [params]
-gitRepo = "https://github.com/cxz888/cxz888.xyz"
+gitRepo = "https://github.com/idlercloud/idlercloud.fun"
 # FixIt 主题版本
 version = "0.2.X"
 
@@ -82,7 +82,7 @@ style = "mp"
 
 [params.githubCorner]
 enable = true
-permalink = "https://github.com/cxz888/cxz888.xyz"
+permalink = "https://github.com/idlercloud/idlercloud.fun"
 position = "right"
 title = ""
 
@@ -100,7 +100,7 @@ lazyLoad = true
 lightTheme = "light"
 mapping = "og:title"
 reactionsEnabled = "1"
-repo = "cxz888/cxz888.xyz"
+repo = "idlercloud/idlercloud.fun"
 repoId = "R_kgDOHz_lZg"
 term = ""
 
@@ -160,7 +160,7 @@ name = ""
 post = ""
 pre = "<i class='fa-brands fa-github fa-fw'></i>"
 title = "GitHub"
-url = "https://github.com/cxz888/cxz888.xyz"
+url = "https://github.com/idlercloud/idlercloud.fun"
 weight = ""
 
 [menu.main.params]

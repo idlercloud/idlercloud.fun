@@ -1,3 +1,3 @@
 # README
 
-个人博客 [cxz888.xyz](cxz888.xyz) 托管仓库
+个人博客 [idlercloud.fun](idlercloud.fun) 托管仓库

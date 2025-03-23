@@ -3,8 +3,8 @@ title: "迁移说明"
 subtitle: ""
 date: 2022-08-12T22:40:19+08:00
 draft: false
-author: "cxz888"
-authorLink: "https://cxz888.xyz"
+author: "idlercloud"
+authorLink: "https://idlercloud.fun"
 authorEmail: "idlercloud@gmail.com"
 description: ""
 keywords: ""
@@ -164,8 +164,8 @@ Hugo 不太方便的一点是，本地写作之后生成站点，需要手动同
 
 8/13 更新说明：
 
--   花了一早上成功迁移到 Github Pages 上了，同样的写完 push 即可。
--   服务器拜拜咯，等我有钱了再考虑您呐。
--   现在的目标是有朝一日写出对得起自己部署网站花费的时间的文章了。
+- 花了一早上成功迁移到 Github Pages 上了，同样的写完 push 即可。
+- 服务器拜拜咯，等我有钱了再考虑您呐。
+- 现在的目标是有朝一日写出对得起自己部署网站花费的时间的文章了。
 
 ![喝茶看报猫猫](/memes/tea-newspaper-cat.jpg)

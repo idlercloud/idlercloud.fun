@@ -3,8 +3,8 @@ title: "使用 WSL2 时碰到的小问题"
 subtitle: ""
 date: 2022-08-11T21:02:21+08:00
 draft: false
-author: "cxz888"
-authorLink: "https://cxz888.xyz"
+author: "idlercloud"
+authorLink: "https://idlercloud.fun"
 authorEmail: "idlercloud@gmail.com"
 description: ""
 keywords: ""
