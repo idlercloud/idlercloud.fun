@@ -113,5 +113,5 @@ void print_diff(vector<vector<int>> &dp, vector<string> &s1, vector<string> &s2,
 ---
 
 > 作者: <no value>  
-> URL: http://cxz888.xyz/posts/tech/lcs_for_diff_myers/  
+> URL: http://idlercloud.xyz/posts/tech/lcs_for_diff_myers/  
 

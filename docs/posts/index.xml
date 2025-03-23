@@ -1,14 +1,14 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>所有文章 - 闲云的博客</title>
-    <link>http://cxz888.xyz/posts/</link>
+    <link>http://idlercloud.xyz/posts/</link>
     <description>所有文章 | 闲云的博客</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 27 Oct 2024 15:09:26 &#43;0800</lastBuildDate><atom:link href="http://cxz888.xyz/posts/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 27 Oct 2024 15:09:26 &#43;0800</lastBuildDate><atom:link href="http://idlercloud.xyz/posts/" rel="self" type="application/rss+xml" /><item>
   <title>文章与博客推荐</title>
-  <link>http://cxz888.xyz/posts/tech/recommend_articles/</link>
+  <link>http://idlercloud.xyz/posts/tech/recommend_articles/</link>
   <pubDate>Sun, 27 Oct 2024 15:09:26 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/recommend_articles/</guid>
+  <author>idlercloud</author>
+  <guid>http://idlercloud.xyz/posts/tech/recommend_articles/</guid>
   <description><![CDATA[<p>平时上班<del>摸鱼</del>和业余会看一些博客和技术文章，其中有一些我觉得不错的，记录在这里。</p>
 <h2 id="业界新闻趣闻">业界新闻/趣闻</h2>
 <ul>
@@ -215,6 +215,189 @@
 </ul>
 <h2 id="精品文章">精品文章</h2>
 <ul>
+<li><a
+  href="https://www.sminez.dev/socrates-is-a-state-machine/#sans-i-o-oh-c-est-le-but"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Socrates is a state machine</a>
+<ul>
+<li>很有趣，滥用 Rust async/await 生成状态机，从而在 stable rust 模拟 generator</li>
+</ul>
+</li>
+<li><a
+  href="https://huonw.github.io/blog/2025/03/rust-fallthrough/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Take a break: Rust match has fallthrough</a>
+<ul>
+<li>用 label break 模拟 switch 的 fallthrough，很有趣</li>
+</ul>
+</li>
+<li><a
+  href="https://github.com/johnousterhout/aposd-vs-clean-code/blob/main/README.md"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>aposd-vs-clean-code</a>
+<ul>
+<li>《软件设计的哲学》和《代码整洁之道》作者的辩论</li>
+<li>感觉 uncle bob 有点太偏激了</li>
+</ul>
+</li>
+<li><a
+  href="https://herecomesthemoon.net/2024/11/two-factions-of-cpp/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>The two factions of C++</a>
+<ul>
+<li>C++ 作者 BS 喜欢强调「C++ 没有方言」</li>
+<li>但在本文作者看来，C++ 没有方言的梦可能已经破灭了许多年</li>
+<li>作者认为 C++ 领域中最明显的分野是：
+<ul>
+<li>相对现代、能力充足、将其代码作为资产的技术公司</li>
+<li>其他人，更古老、更固执、更跟不上时代的用户</li>
+</ul>
+</li>
+<li>BS 和 HS 很喜欢强调 C++ 数十年来的遗产，使得语言演化必须要最小化对已有部分的修改</li>
+<li>但谷歌等公司（使用相对现代的 C++、拥有自动化工具和测试以及现代基础设施）的需求与（非常强烈的）向后兼容性愿望之间存在明显的脱节</li>
+<li>所以，作者认为，至少在工具上，C++ 被分为了两个明显的阵营</li>
+<li>原文挺精彩，这里的概括很不完全，建议阅读</li>
+</ul>
+</li>
+<li><a
+  href="https://herecomesthemoon.net/2025/01/type-inference-in-rust-and-cpp/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Type Inference in Rust and C++</a>
+<ul>
+<li>对比 Rust 和 C++ 的类型推导，包括为什么二者发展为这样</li>
+<li>当然免不了调侃一下 Swift 臭名昭著的极慢类型推导</li>
+</ul>
+</li>
+<li><a
+  href="https://www.lpalmieri.com/posts/2020-09-27-zero-to-production-4-are-we-observable-yet/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Are we observable yet? An introduction to Rust telemetry</a>
+<ul>
+<li>虽然是比较久之前的文章（2020 年 9 月），但是也尚不算过时</li>
+<li>介绍了可观察性的概念，从为什么到是什么到如何做</li>
+<li>介绍了 Rust 中的相关 crate，带有丰富的示例</li>
+<li>写得很好。作者的书《Zero To Production In Rust》也很不错</li>
+</ul>
+</li>
+<li><a
+  href="https://nipafx.dev/java-visitor-pattern-pointless/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Visitor Pattern Considered Pointless - Use Pattern Switches Instead</a>
+<ul>
+<li>用现代 java 的 sealed interface 和模式匹配代替 visitor 模式</li>
+<li>更简洁、更自然、更灵活、甚至可能性能更好</li>
+<li>所以有人说设计模式是为了弥补语言缺陷</li>
+</ul>
+</li>
+<li><a
+  href="https://caseymuratori.com/blog_0015"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Semantic Compression</a>
+<ul>
+<li>作者表达了对面向对象思维的怀疑，提倡所谓语义压缩</li>
+<li>大致可以认为是：不要先以对象思维、抽象思维编码，而是面向过程地编写后，再提炼精髓</li>
+</ul>
+</li>
+<li><a
+  href="https://fractalfir.github.io/generated_html/refl_priv.html"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Rust, reflection and access rules</a>
+<ul>
+<li>思考如果 Rust 有反射（无论是静态的还是动态的），它如何与访问规则交互</li>
+<li>由于 Rust 是一个系统编程语言，它有一些额外的权衡</li>
+<li>尤其是需要考虑到内存安全问题</li>
+</ul>
+</li>
 <li><a
   href="https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/"
   
@@ -551,6 +734,25 @@
 <h2 id="书籍教程">书籍教程</h2>
 <ul>
 <li><a
+  href="https://toetoe55.github.io/async-rt-book/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Rust 异步运行时基础部件</a>
+<ul>
+<li>设计和实现简单的异步运行时</li>
+<li>其实还是有点简陋的，但是查漏补缺也不错</li>
+</ul>
+</li>
+<li><a
   href="https://www.craftinginterpreters.com/contents.html"
   
   
@@ -863,20 +1065,20 @@
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="http://cxz888.xyz/posts/tech/recommend_articles/"
+  href="http://idlercloud.xyz/posts/tech/recommend_articles/"
   
   
   
   
   
->http://cxz888.xyz/posts/tech/recommend_articles/</a></p>
+>http://idlercloud.xyz/posts/tech/recommend_articles/</a></p>
 </blockquote>]]></description>
 </item><item>
   <title>在 Rust 中表征树形结构</title>
-  <link>http://cxz888.xyz/posts/tech/tree_in_rust/</link>
+  <link>http://idlercloud.xyz/posts/tech/tree_in_rust/</link>
   <pubDate>Sun, 14 Aug 2022 23:42:42 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/tree_in_rust/</guid>
+  <author>idlercloud</author>
+  <guid>http://idlercloud.xyz/posts/tech/tree_in_rust/</guid>
   <description><![CDATA[<p>树形结构在软件中相当常用。比如文件目录、右键菜单、多级收藏夹等。</p>
 <p>在其它语言，如 C/C++ 中，表达树形结构可能仅需要指针即可，然而在 Rust 中需要稍费周折。</p>
 <p><figure><a class="lightgallery" href="/images/tree_eg_content.png" title="树示例" data-thumbnail="/images/tree_eg_content.png" data-sub-html="<h2>Hugo 文章结构</h2><p>树示例</p>">
@@ -1421,99 +1623,20 @@
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="http://cxz888.xyz/posts/tech/tree_in_rust/"
+  href="http://idlercloud.xyz/posts/tech/tree_in_rust/"
   
   
   
   
   
->http://cxz888.xyz/posts/tech/tree_in_rust/</a></p>
+>http://idlercloud.xyz/posts/tech/tree_in_rust/</a></p>
 </blockquote>]]></description>
 </item><item>
-  <title>迁移说明</title>
-  <link>http://cxz888.xyz/posts/tech/about_migration_to_hugo/</link>
-  <pubDate>Fri, 12 Aug 2022 22:40:19 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/about_migration_to_hugo/</guid>
-  <description><![CDATA[<p>最近花了一些时间把博客从 WordPress 迁移到了 Hugo 上。</p>
-<p>来简单谈谈我的选择吧，夹杂一些胡思乱想，和技术上的关系不是很大。</p>
-<p>大概是今年 2 月多吧，在大佬的指引下建立了自己的博客。</p>
-<p>当时就是有些创作欲，又觉得知乎、CSDN、博客园之类的平台不够满意，于是做了这个有些草率的决定。</p>
-<p>说草率主要是因为服务器蛮贵的。。。然后我发现自己目前的水平还不够高，只能写一些使用教程啥的。</p>
-<p>就是肚里墨水不太足呗。</p>
-<p><figure><a class="lightgallery" href="/memes/hifumi-ahaha.jpg" title="hifumi 啊哈哈" data-thumbnail="/memes/hifumi-ahaha.jpg" data-sub-html="<h2>啊哈哈</h2><p>hifumi 啊哈哈</p>">
-    
-  </a><figcaption class="image-caption">啊哈哈</figcaption>
-  </figure></p>
-<p>总之最初选择的是开箱即用、傻瓜操作的 WordPress。</p>
-<p>它足够强大，资料也足够丰富，想要什么一查就有。</p>
-<p>但是对我而言缺点也很快暴露出来。</p>
-<h2 id="1-自定义需要一定的-phpcss-功底">1. 自定义需要一定的 PHP、CSS 功底</h2>
-<p>CSS 还好，只到够用的程度的话看看就懂。</p>
-<p>何况基本上未来必学，早点熟悉也不是坏事。</p>
-<p>但我对 PHP 并没有太多的兴趣（无贬义），可要是基本语法不懂基本上很难自定义，只能抄抄别人的代码，然后不断（痛苦）试错。</p>
-<h2 id="2-编辑体验割裂">2. 编辑体验割裂</h2>
-<p>我喜欢用 markdown 写作。WordPress 则有自己的编辑器。</p>
-<p>虽然也有很好的插件支持 markdown，然而在网站中写文章还是很割裂。</p>
-<p>有一次我在写文章时服务器忽然崩了，重启后草稿丢失，失去灵感索然无味。</p>
-<p>我其实最想要的是本地写作，然后某个命令一键发布。</p>
-<h2 id="3-后台界面有点丑">3. 后台界面有点丑</h2>
-<p>指的是登录之后那个丑丑的页眉工具栏。</p>
-<p>我试了不少方法自定义，都以失败告终。</p>
-<p>而后台的设置界面反应不够快，还经常要在主题文件编辑器和主页之间来回窜。</p>
-<h2 id="4-功能太多太复杂">4. 功能太多太复杂</h2>
-<p>WordPress 并非一个纯粹的面向个人博客的网站系统，它是广义上的 CMS。</p>
-<p>面对诸多商业网站的需求，因而必须要很多复杂的功能。包括在主题和插件中能搜索到的，很多都是面向电子商务网站的。</p>
-<p>因为功能太多，所以 API 复杂，很难从中找到自己需要的。</p>
-<h2 id="简单纯粹就是好">简单纯粹就是好</h2>
-<p>其实这些原因都不算太大吧，只是一个个积累起来有点不顺手。</p>
-<p>这种不顺手有点妨碍了我最初的目的——写作。我花了大量的时间去自定义页面主题，去寻找插件，反垃圾评论，SEO 等等。</p>
-<p>可我最初只是想写点东西，释放释放创作欲。</p>
-<p>现在我开始觉得简单纯粹的东西最好。</p>
-<p>分析一下，我理想的博客系统只有如下需求：</p>
-<ol>
-<li>方便的写作和发布</li>
-<li>简易的评论系统</li>
-<li>分类、标签功能</li>
-</ol>
-<p>我是比较爱折腾的那种人，曾经花了两天捣鼓终端美化。这次也花了不少时间捣鼓了 Hugo。</p>
-<p>它的主要优点是易于理解。不像 WordPress 那庞大的系统，难以知晓它在幕后究竟做了什么。Hugo 这样的静态网站生成器的大致行为很容易猜测。这使得自定义很方便。</p>
-<p>它可以轻松满足我的三个需求。</p>
-<p>静态页面还有个好处是硬件需求不高，而且迁移方便。搭建自己的博客只需 Github Pages 即可，没必要租服务器。而且 Github Pages 的集成更好使，推荐。</p>
-<h2 id="最小可工作的-hugo">最小可工作的 Hugo</h2>
-<p>刚下载的 Hugo 需要找到一个合适的主题。幸好这方面资源很多，除了官方列表中的，在知乎等地搜索可以找到很多开源的主题。</p>
-<p>我目前使用的 FixIt 就很让人满意。它所参考的 LoveIt 也很不错。</p>
-<p>Hugo 不太方便的一点是，本地写作之后生成站点，需要手动同步到服务器中。</p>
-<p>最开始我是用 WinSCP 的同步功能。但是它太慢了，而且还是需要不少操作。</p>
-<p>后来是上传压缩包、解压、覆盖。虽然快了不少，但是操作更多。</p>
-<p>现在的方案是在服务器维护远程非裸仓库，本地构建好直接 push 到远端即可，十分方便。</p>
-<p>主题自带的分类和标签功能基本满足需求。而尽管现在尚未开启，评论系统也是支持的。</p>
-<p>一切问题解决了。</p>
-<p>现在的工作流程就是：本地写作 -&gt; hugo 构建 -&gt; push。</p>
-<p>几乎是最小工作量了。</p>
-<p>唯一可能改进的地方就是写作时用到的图片，目前我是手动将其放到 static 目录下，使用 pinga 压缩，然后在 md 中引用。</p>
-<p>不过反正是在本地，未来完全可以写个简易程序将其自动化。</p>
-<p>最理想的效果就是写作完，敲一个命令，然后自动将用到的图片处理好，并且构建和 push。</p>
-<h2 id="思考">思考</h2>
-<p>这篇博客的标题，本来想叫做迁移说明和极简主义。</p>
-<p>不过其实称不上极简啦。也就是偏好简单而已。</p>
-<p>软件工程中著名的 KISS 原则，感觉同样可以应用到生活中。</p>
-<p>越简单的人生，具有越强大的免疫力以抵挡外界。</p>
-<p>希望能一直简单下去，提高自我，有朝一日写出对得起服务器价格的文章吧。</p>
-<p>（不过刚好服务器快过期了，也许我会试着迁移到 Github Pages 上试试。)</p>
-<p>8/13 更新说明：</p>
-<ul>
-<li>花了一早上成功迁移到 Github Pages 上了，同样的写完 push 即可。</li>
-<li>服务器拜拜咯，等我有钱了再考虑您呐。</li>
-<li>现在的目标是有朝一日写出对得起自己部署网站花费的时间的文章了。</li>
-</ul>
-<p></p>]]></description>
-</item><item>
   <title>Linux 通过 gogs 或 gitea 自建 Git 服务</title>
-  <link>http://cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</link>
+  <link>http://idlercloud.xyz/posts/tech/self-build_git_service_with_gitea/</link>
   <pubDate>Thu, 11 Aug 2022 22:09:03 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</guid>
+  <author>idlercloud</author>
+  <guid>http://idlercloud.xyz/posts/tech/self-build_git_service_with_gitea/</guid>
   <description><![CDATA[<p>之前写课设时因为需要合作，于是在服务器上搭建了一个临时、简陋的 git 服务。</p>
 <p>没有 web 界面，纯命令行交互，添加密钥都要手动 ssh 到服务器。</p>
 <p>这次就尝试用开源应用搭建一个功能完善、使用方便、颜值能打的 git 服务。</p>
@@ -1615,7 +1738,7 @@
 <p>实际上 git 服务也完全不需要 root 用户，我们应该切换到普通用户。</p>
 <p>最好是用 git 这个用户名，这样最后 ssh 的 clone 地址就是 <code>git@xxxx</code>。不过如果你已经安装过 git，那么 git 这个用户可能已经被注册了，而且如果用 <code>su git</code> 切换到这个用户后似乎无法正常使用命令。</p>
 <p>git 这个用户不行的话，就用 <code>sudo adduser</code> 另外创建用户，比如 <code>sudo adduser gogs</code>。按照指示完成创建，最后用 <code>su gogs</code> 切换过去即可。</p>
-<p>cd 到二进制文件所在的目录，如果直接执行 <code>./gogs web</code> 可能显示权限不足，那么就先 <code>chmod +x gogs</code>。如果是用 SQLite3 的话，为了后续能创建数据库，这里还要进行一下 <code>chown gogs:gogs /www/wwwroot/repo.cxz888.xyz</code> 把目录的权限赋予给当前用户。</p>
+<p>cd 到二进制文件所在的目录，如果直接执行 <code>./gogs web</code> 可能显示权限不足，那么就先 <code>chmod +x gogs</code>。如果是用 SQLite3 的话，为了后续能创建数据库，这里还要进行一下 <code>chown gogs:gogs /www/wwwroot/repo.idlercloud.fun</code> 把目录的权限赋予给当前用户。</p>
 <p>剩下的就和 docker 差不多了，不过最后 ssh clone 地址是 <code>gogs@xxxx</code>。</p>
 <p>可能遇到的情况是，gogs 默认情况下使用的是 3000 端口。如果你的 3000 端口已经被占用，那可能就需要一些修改。</p>
 <p>按照官方所说，你不应该修改源代码中的 <code>app.ini</code>，而是应该在二进制文件所在目录下新建 <code>custom/conf/app.ini</code>。（docker 方式安装无需担心这点）</p>
@@ -1686,7 +1809,7 @@
 <p>到现在为止，无论是 gogs 还是 gitea，也无论如何安装，用户都得通过 <code>服务器 IP:端口</code> 的方式访问主页，这无疑是很不便而丑陋的。</p>
 <p>所以应当通过映射来使用域名直接访问。</p>
 <p>可以参考我的<a
-  href="http://blog.cxz888.xyz/posts/blog_site_note_1/"
+  href="http://idlercloud.fun/posts/blog_site_note_1/"
   
   
     
@@ -1699,8 +1822,8 @@
   
   
 >「个人博客建站笔记」1.网站建成</a>中域名解析的部分。</p>
-<p>在你的域名服务上提供的 DNS 解析里添加 A 记录。比如我是将 <code>repo.cxz888.xyz</code> 解析到自己的服务器 IP。</p>
-<p>DNS 解析对端口是一无所知的，所以现在得通过 <code>repo.cxz888.xyz:端口号</code> 来访问 git 服务，还是比较丑。</p>
+<p>在你的域名服务上提供的 DNS 解析里添加 A 记录。比如我是将 <code>repo.idlercloud.fun</code> 解析到自己的服务器 IP。</p>
+<p>DNS 解析对端口是一无所知的，所以现在得通过 <code>repo.idlercloud.fun:端口号</code> 来访问 git 服务，还是比较丑。</p>
 <p>下一步就是通过宝塔的反向代理来解析端口。如果你不是用宝塔，那么可以根据你使用的 web 服务器软件，如 nginx、apache，去百度或谷歌搜索反向代理的方法。</p>
 <blockquote>
 <p>你也可以顺手给这个网站申请个 SSL 证书</p>
@@ -1726,84 +1849,20 @@
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="http://cxz888.xyz/posts/tech/self-build_git_service_with_gitea/"
+  href="http://idlercloud.xyz/posts/tech/self-build_git_service_with_gitea/"
   
   
   
   
   
->http://cxz888.xyz/posts/tech/self-build_git_service_with_gitea/</a></p>
+>http://idlercloud.xyz/posts/tech/self-build_git_service_with_gitea/</a></p>
 </blockquote>]]></description>
 </item><item>
-  <title> 数电实验验收，关于内卷</title>
-  <link>http://cxz888.xyz/posts/life/thought_about_involution/</link>
-  <pubDate>Thu, 11 Aug 2022 21:48:06 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/life/thought_about_involution/</guid>
-  <description><![CDATA[<p>今天 (2022/5/15) 验收数电的实验。</p>
-<p>各路神仙大战。</p>
-<p>太可怕了。</p>
-<p>可人生的意义难道仅在于此吗？</p>
-<h2 id="id-1">1</h2>
-<p>数电实验的内容是使用蜂鸣器演奏歌曲。</p>
-<p>模板代码老师写好了。基础任务就是换首曲子就行，扩展任务也就是加上变调的功能。</p>
-<p></p>
-<p>我摆了，所以只做了基础任务。本来想换首国际歌，可惜室友先行一步，于是我又换了喀秋莎。</p>
-<p>这个曲子我挺喜欢的，音调不高也不低。半个小时搞定了，十五分钟挑歌，十五分钟敲成代码。</p>
-<p>今天验收一看。神仙打架。</p>
-<p>变调可以升八度降八度的，可以暂停的，可以倍速播放的，还有我压根没听过的“按钮消抖”。</p>
-<p>麻了。</p>
-<p>对了，似乎只有我一人，真的只完成了基础任务。</p>
-<p>我验收恐怕只有一分钟，半分钟用在连接板子上。</p>
-<h2 id="id-2">2</h2>
-<p>内卷无时无刻不伴随着我。</p>
-<p>大一时我是卷怪。每天六点起床，“学”到晚上十二点。每一小时都安排得仔仔细细。</p>
-<p>因为高考失利，没能进计算机系，为了转专业迫不得已。</p>
-<p>结局是美好的。我成功了。</p>
-<p>我和第二名的差距，比第二名和第十三名的差距都大。</p>
-<p>只是绩点而已。</p>
-<p>这也是我最后悔的事情之一。</p>
-<p>如果大一我能不要那么卷，我是不是能学到更多有意思的东西？而非延续高三的经历，题海中挣扎一年。</p>
-<p>编译原理、计组、计网、操作系统……那么多有意思的东西，学都学不完。</p>
-<h2 id="id-3">3</h2>
-<p>内卷这件事可怕之处在于大家也许不想卷，甚至极度反感卷，却又不得不卷。</p>
-<p>考研的机会越来越少，竞争越来越激烈。保研的名额有限，想去好学校还得有亮眼的经历。</p>
-<p>学生的信息渠道狭窄，不知道其他人如何，也不知道自己要做到什么程度才合适——正如我大一不知道要卷成什么样才能刚好转专业而又不至于浪费时间。</p>
-<p>单一的信息面锁定了我们，我们惟卷以待——只要卷到最狠，一定是最优解。</p>
-<p>我不卷了，不止是因为我反卷。我身边那么多人，没见过哪个爱卷的。</p>
-<p>我能不卷，只是因为我不打算读研。我毕业就去工作，而且自信有能力进个好厂。</p>
-<p>如果我要读研呢？那我大概也会成为卷卷洪流的一份子吧。</p>
-<p>大一的内卷经历确实给了我学习自己喜爱专业的机会，然而除此之外几乎只余祸害。</p>
-<p>内卷不会为我的人生留下太多，只是犹如过境蝗虫般攫取我的青春罢。</p>
-<p>以后我也许会回忆起我大二时写的编译器、爬虫、写作软件，至于数电实验雕花，恐怕很快就会遗忘吧。</p>
-<h2 id="id-4">4</h2>
-<p>说了很多。</p>
-<p>但其实仔细一想，为什么而卷？</p>
-<p>答曰：先苦后甜。少壮不努力，老大徒伤悲。（容我把卷和努力混为一谈，这俩并不是一个性质）</p>
-<p>我们期待着更好的未来。那就必须在看不清路的现在做好准备。</p>
-<p>问题是，更好有多好？更好能多好？以及，值得吗？</p>
-<p>高三毕业的时候我就知道。</p>
-<p>我未来不需要大富大贵、山珍海味、名动天下等等听上去很诱人的话。</p>
-<p>我只希望悠悠闲闲过完一生。</p>
-<p>我不打算结婚，房、车对我来说可有可无。我不在乎衣服好坏，能穿就行；我不在乎吃得多好，门口沙县小吃就是顶美味的。</p>
-<p>想了想，我最可能烧钱的理想也许是，希望将来可以走遍整个中国，尝遍所有的民间美食——不过因为比较懒，可能明年就会砍了这个理想吧。</p>
-<p>即使是这样，我大一还是卷了。</p>
-<p>大部分是因为更喜欢计算机而不喜欢原专业；另一部分也不可否认，计算机的待遇现在是极好的。</p>
-<p>当然现在差不多彻底摆了，因为几乎可以肯定现在的我按部就班就足够达成目标了。</p>
-<p>那其他人呢？不可以要求其他人什么都不在乎，我不在乎只是个人性格使然。</p>
-<p>那在乎的，就活该得不到，或者活该卷成这样才能得到？</p>
-<p>婚、房、车对于许多现代人来说是刚需。为什么刚需的满足都已经这么艰难了？</p>
-<h2 id="id-5">5</h2>
-<p>感触良多，迷茫良多。</p>
-<p>其实想写的不止这些。有很多想说的内容却出不了口。</p>
-<p>也许是我的文笔实在浅薄吧。</p>
-<p>还是写代码适合我。</p>]]></description>
-</item><item>
   <title>使用 WSL2 时碰到的小问题</title>
-  <link>http://cxz888.xyz/posts/tech/wsl_rust_tips/</link>
+  <link>http://idlercloud.xyz/posts/tech/wsl_rust_tips/</link>
   <pubDate>Thu, 11 Aug 2022 21:02:21 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/wsl_rust_tips/</guid>
+  <author>idlercloud</author>
+  <guid>http://idlercloud.xyz/posts/tech/wsl_rust_tips/</guid>
   <description><![CDATA[<p>写这篇博客时，我因为 CS110L 的作业要求必须安装 Linux 环境。几番周折最后选择了 Windows 下的 WSL2。现在看来很不错。</p>
 <p>过程中也遇到一些小坑：</p>
 <ol>
@@ -2001,20 +2060,20 @@
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="http://cxz888.xyz/posts/tech/wsl_rust_tips/"
+  href="http://idlercloud.xyz/posts/tech/wsl_rust_tips/"
   
   
   
   
   
->http://cxz888.xyz/posts/tech/wsl_rust_tips/</a></p>
+>http://idlercloud.xyz/posts/tech/wsl_rust_tips/</a></p>
 </blockquote>]]></description>
 </item><item>
   <title>最长公共子序列 (LCS) 在 diff 命令中的应用——Myers 算法</title>
-  <link>http://cxz888.xyz/posts/tech/lcs_for_diff_myers/</link>
+  <link>http://idlercloud.xyz/posts/tech/lcs_for_diff_myers/</link>
   <pubDate>Thu, 11 Aug 2022 18:52:26 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/lcs_for_diff_myers/</guid>
+  <author>idlercloud</author>
+  <guid>http://idlercloud.xyz/posts/tech/lcs_for_diff_myers/</guid>
   <description><![CDATA[<p>今天 (2022/2/26) 做 CS 110L 的 week2 作业，内容是用 Rust 编写一个简单的 <code>diff</code> 命令。</p>
 <p>我才知道原来 Linux 和 Git 的 <code>diff</code> 命令，它的底层算法之一叫做 Myers 算法，而其根本原理是最长公共子序列。</p>
 <p>本文讲述 <strong>LCS 的使用和 Myers 算法</strong>。前置知识是动态规划求解 LCS。</p>
@@ -2114,20 +2173,20 @@ $$</p>
 <blockquote>
 <p>版权声明：本文采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="http://cxz888.xyz/posts/tech/lcs_for_diff_myers/"
+  href="http://idlercloud.xyz/posts/tech/lcs_for_diff_myers/"
   
   
   
   
   
->http://cxz888.xyz/posts/tech/lcs_for_diff_myers/</a></p>
+>http://idlercloud.xyz/posts/tech/lcs_for_diff_myers/</a></p>
 </blockquote>]]></description>
 </item><item>
   <title>「工具推荐——软件」1.WGestures：鼠标手势</title>
-  <link>http://cxz888.xyz/posts/tech/recommand_tool_wgestures/</link>
+  <link>http://idlercloud.xyz/posts/tech/recommand_tool_wgestures/</link>
   <pubDate>Thu, 11 Aug 2022 17:20:02 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/recommand_tool_wgestures/</guid>
+  <author>idlercloud</author>
+  <guid>http://idlercloud.xyz/posts/tech/recommand_tool_wgestures/</guid>
   <description><![CDATA[<p>这个系列主要是推荐一些计算机上好使用的工具。目前计划是除去软件，还会分享一些网站，所以也细分开来了。</p>
 <p>本文介绍 <strong>WGestures，一个免费开源的鼠标手势软件</strong>。</p>
 <h2 id="功能介绍">功能介绍</h2>
@@ -2188,26 +2247,26 @@ $$</p>
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="http://cxz888.xyz/posts/tech/recommand_tool_wgestures/"
+  href="http://idlercloud.xyz/posts/tech/recommand_tool_wgestures/"
   
   
   
   
   
->http://cxz888.xyz/posts/tech/recommand_tool_wgestures/</a></p>
+>http://idlercloud.xyz/posts/tech/recommand_tool_wgestures/</a></p>
 </blockquote>]]></description>
 </item><item>
   <title>「个人博客建站笔记」2.网站的布局</title>
-  <link>http://cxz888.xyz/posts/tech/blog_site_note_2/</link>
+  <link>http://idlercloud.xyz/posts/tech/blog_site_note_2/</link>
   <pubDate>Thu, 11 Aug 2022 11:21:45 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/blog_site_note_2/</guid>
+  <author>idlercloud</author>
+  <guid>http://idlercloud.xyz/posts/tech/blog_site_note_2/</guid>
   <description><![CDATA[<p>本文讲述<strong>如何优化 WordPress 网站的界面布局</strong>。</p>
 <ul>
 <li>涉及内容：网站后台、主题、PHP、HTML、CSS。</li>
 <li>面向人群：新手。</li>
 <li>前置知识：WordPress 网站的搭建（见<a
-  href="https://cxz888.xyz/posts/blog_site_note_1"
+  href="https://idlercloud.fun/posts/blog_site_note_1"
   
   
     
@@ -2439,7 +2498,7 @@ $$</p>
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="https://cxz888.xyz/posts/blog_site_note_2/"
+  href="https://idlercloud.fun/posts/blog_site_note_2/"
   
   
     
@@ -2451,14 +2510,14 @@ $$</p>
   
   
   
->https://cxz888.xyz/posts/blog_site_note_2/</a></p>
+>https://idlercloud.fun/posts/blog_site_note_2/</a></p>
 </blockquote>]]></description>
 </item><item>
   <title>「个人博客建站笔记」1.网站建成</title>
-  <link>http://cxz888.xyz/posts/tech/blog_site_note_1/</link>
+  <link>http://idlercloud.xyz/posts/tech/blog_site_note_1/</link>
   <pubDate>Wed, 10 Aug 2022 18:41:49 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/blog_site_note_1/</guid>
+  <author>idlercloud</author>
+  <guid>http://idlercloud.xyz/posts/tech/blog_site_note_1/</guid>
   <description><![CDATA[<p>这是我在以前博客的第一篇文章，主要记述的是使用 WordPress 和宝塔 Linux 面板，从零开始搭建一个基础博客网站的过程。</p>
 <ul>
 <li>涉及内容：服务器、域名、域名解析、宝塔 Linux 面板、wordpress 的使用。</li>
@@ -2620,7 +2679,7 @@ $$</p>
   
 >namecheap</a>。</p>
 <p>我只知道 GoDaddy 是老牌子，而 name.com 便宜些。后两个只是听说性价比不错。我个人选择的是 name.com，它的名气似乎不是很大，以至于中文互联网上没找到什么教程。我就假设你是用的 name.com 了，其他网站的操作也差不了多少。</p>
-<p>在购买域名之前，你需要先决定好网站的地址。顶级域名就那么些，你只能从中选，但是二级域名是由你决定的，如 <code>cxz888.xyz</code>。有些域名可能已经被人注册了，这时候可能你就只能换一个了，如果你实在很想要那个域名，那就得想办法联系拥有者商量了。</p>
+<p>在购买域名之前，你需要先决定好网站的地址。顶级域名就那么些，你只能从中选，但是二级域名是由你决定的，如 <code>idlercloud.fun</code>。有些域名可能已经被人注册了，这时候可能你就只能换一个了，如果你实在很想要那个域名，那就得想办法联系拥有者商量了。</p>
 <p>决定好域名，支付完成后，别着急，域名相关的东西还有下一个呢。</p>
 <blockquote>
 <p>买域名的时候，除去域名本身的费用外，还可能附加一些安全和隐私相关的内容。这部分买不买就取决于你了。不过 SSL 证书之后可以弄到免费的。</p>
@@ -2633,7 +2692,7 @@ $$</p>
 </blockquote>
 <p>购买好域名，进入后台，点进域名的界面。</p>
 <blockquote>
-<p>具体操作 (name.com)：右上角的用户图标下拉菜单点击 overview（概览），在下面找到自己的域名，如 <code>cxz888.xyz</code>，点进去。</p>
+<p>具体操作 (name.com)：右上角的用户图标下拉菜单点击 overview（概览），在下面找到自己的域名，如 <code>idlercloud.fun</code>，点进去。</p>
 </blockquote>
 <blockquote>
 <p>另外，name.com 的最下方是可以选择语言的。</p>
@@ -2730,7 +2789,7 @@ $$</p>
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="https://cxz888.xyz/posts/blog_site_note_1/"
+  href="https://idlercloud.fun/posts/blog_site_note_1/"
   
   
     
@@ -2742,7 +2801,7 @@ $$</p>
   
   
   
->https://cxz888.xyz/posts/blog_site_note_1/</a></p>
+>https://idlercloud.fun/posts/blog_site_note_1/</a></p>
 </blockquote>]]></description>
 </item></channel>
 </rss>

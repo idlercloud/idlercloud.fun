@@ -1,20 +1,20 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
   <channel>
     <title>网站 - 标签 - 闲云的博客</title>
-    <link>http://cxz888.xyz/tags/%E7%BD%91%E7%AB%99/</link>
+    <link>http://idlercloud.xyz/tags/%E7%BD%91%E7%AB%99/</link>
     <description>网站 - 标签 - 闲云的博客</description>
-    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 11:21:45 &#43;0800</lastBuildDate><atom:link href="http://cxz888.xyz/tags/%E7%BD%91%E7%AB%99/" rel="self" type="application/rss+xml" /><item>
+    <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 11 Aug 2022 11:21:45 &#43;0800</lastBuildDate><atom:link href="http://idlercloud.xyz/tags/%E7%BD%91%E7%AB%99/" rel="self" type="application/rss+xml" /><item>
   <title>「个人博客建站笔记」2.网站的布局</title>
-  <link>http://cxz888.xyz/posts/tech/blog_site_note_2/</link>
+  <link>http://idlercloud.xyz/posts/tech/blog_site_note_2/</link>
   <pubDate>Thu, 11 Aug 2022 11:21:45 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/blog_site_note_2/</guid>
+  <author>idlercloud</author>
+  <guid>http://idlercloud.xyz/posts/tech/blog_site_note_2/</guid>
   <description><![CDATA[<p>本文讲述<strong>如何优化 WordPress 网站的界面布局</strong>。</p>
 <ul>
 <li>涉及内容：网站后台、主题、PHP、HTML、CSS。</li>
 <li>面向人群：新手。</li>
 <li>前置知识：WordPress 网站的搭建（见<a
-  href="https://cxz888.xyz/posts/blog_site_note_1"
+  href="https://idlercloud.fun/posts/blog_site_note_1"
   
   
     
@@ -246,7 +246,7 @@
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="https://cxz888.xyz/posts/blog_site_note_2/"
+  href="https://idlercloud.fun/posts/blog_site_note_2/"
   
   
     
@@ -258,14 +258,14 @@
   
   
   
->https://cxz888.xyz/posts/blog_site_note_2/</a></p>
+>https://idlercloud.fun/posts/blog_site_note_2/</a></p>
 </blockquote>]]></description>
 </item><item>
   <title>「个人博客建站笔记」1.网站建成</title>
-  <link>http://cxz888.xyz/posts/tech/blog_site_note_1/</link>
+  <link>http://idlercloud.xyz/posts/tech/blog_site_note_1/</link>
   <pubDate>Wed, 10 Aug 2022 18:41:49 &#43;0800</pubDate>
-  <author>cxz888</author>
-  <guid>http://cxz888.xyz/posts/tech/blog_site_note_1/</guid>
+  <author>idlercloud</author>
+  <guid>http://idlercloud.xyz/posts/tech/blog_site_note_1/</guid>
   <description><![CDATA[<p>这是我在以前博客的第一篇文章，主要记述的是使用 WordPress 和宝塔 Linux 面板，从零开始搭建一个基础博客网站的过程。</p>
 <ul>
 <li>涉及内容：服务器、域名、域名解析、宝塔 Linux 面板、wordpress 的使用。</li>
@@ -427,7 +427,7 @@
   
 >namecheap</a>。</p>
 <p>我只知道 GoDaddy 是老牌子，而 name.com 便宜些。后两个只是听说性价比不错。我个人选择的是 name.com，它的名气似乎不是很大，以至于中文互联网上没找到什么教程。我就假设你是用的 name.com 了，其他网站的操作也差不了多少。</p>
-<p>在购买域名之前，你需要先决定好网站的地址。顶级域名就那么些，你只能从中选，但是二级域名是由你决定的，如 <code>cxz888.xyz</code>。有些域名可能已经被人注册了，这时候可能你就只能换一个了，如果你实在很想要那个域名，那就得想办法联系拥有者商量了。</p>
+<p>在购买域名之前，你需要先决定好网站的地址。顶级域名就那么些，你只能从中选，但是二级域名是由你决定的，如 <code>idlercloud.fun</code>。有些域名可能已经被人注册了，这时候可能你就只能换一个了，如果你实在很想要那个域名，那就得想办法联系拥有者商量了。</p>
 <p>决定好域名，支付完成后，别着急，域名相关的东西还有下一个呢。</p>
 <blockquote>
 <p>买域名的时候，除去域名本身的费用外，还可能附加一些安全和隐私相关的内容。这部分买不买就取决于你了。不过 SSL 证书之后可以弄到免费的。</p>
@@ -440,7 +440,7 @@
 </blockquote>
 <p>购买好域名，进入后台，点进域名的界面。</p>
 <blockquote>
-<p>具体操作 (name.com)：右上角的用户图标下拉菜单点击 overview（概览），在下面找到自己的域名，如 <code>cxz888.xyz</code>，点进去。</p>
+<p>具体操作 (name.com)：右上角的用户图标下拉菜单点击 overview（概览），在下面找到自己的域名，如 <code>idlercloud.fun</code>，点进去。</p>
 </blockquote>
 <blockquote>
 <p>另外，name.com 的最下方是可以选择语言的。</p>
@@ -537,7 +537,7 @@
   
 >CC BY 4.0</a> 进行许可，转载请注明出处。</p>
 <p>本文链接：<a
-  href="https://cxz888.xyz/posts/blog_site_note_1/"
+  href="https://idlercloud.fun/posts/blog_site_note_1/"
   
   
     
@@ -549,7 +549,7 @@
   
   
   
->https://cxz888.xyz/posts/blog_site_note_1/</a></p>
+>https://idlercloud.fun/posts/blog_site_note_1/</a></p>
 </blockquote>]]></description>
 </item></channel>
 </rss>

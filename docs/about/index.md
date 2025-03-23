@@ -18,9 +18,9 @@
 
 - <idlercloud@gmail.com>（不常看）
 - RSS 订阅
-  - [全部文章](https://cxz888.xyz/index.xml)
-    - [仅技术文章](https://cxz888.xyz/categories/tech/index.xml)
-    - [仅生活文章](https://cxz888.xyz/categories/life/index.xml)
+  - [全部文章](https://idlercloud.fun/index.xml)
+    - [仅技术文章](https://idlercloud.fun/categories/tech/index.xml)
+    - [仅生活文章](https://idlercloud.fun/categories/life/index.xml)
 
 ## 感谢
 
@@ -32,5 +32,5 @@
 ---
 
 > 作者: <no value>  
-> URL: http://cxz888.xyz/about/  
+> URL: http://idlercloud.xyz/about/  
 

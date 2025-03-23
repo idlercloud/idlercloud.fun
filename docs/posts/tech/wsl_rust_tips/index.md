@@ -145,5 +145,5 @@ WSL2 要占用不少内存，不过使用起来体验比 VMWare 要好很多。�
 ---
 
 > 作者: <no value>  
-> URL: http://cxz888.xyz/posts/tech/wsl_rust_tips/  
+> URL: http://idlercloud.xyz/posts/tech/wsl_rust_tips/  
 

@@ -356,5 +356,5 @@ fn look_for(&self, curr: usize, name: &str) -> Option<usize> {
 ---
 
 > 作者: <no value>  
-> URL: http://cxz888.xyz/posts/tech/tree_in_rust/  
+> URL: http://idlercloud.xyz/posts/tech/tree_in_rust/  
 

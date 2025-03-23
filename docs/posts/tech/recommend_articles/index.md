@@ -53,6 +53,42 @@
 
 ## 精品文章
 
+- [Socrates is a state machine](https://www.sminez.dev/socrates-is-a-state-machine/#sans-i-o-oh-c-est-le-but)
+  - 很有趣，滥用 Rust async/await 生成状态机，从而在 stable rust 模拟 generator
+- [Take a break: Rust match has fallthrough](https://huonw.github.io/blog/2025/03/rust-fallthrough/)
+  - 用 label break 模拟 switch 的 fallthrough，很有趣
+- [aposd-vs-clean-code](https://github.com/johnousterhout/aposd-vs-clean-code/blob/main/README.md)
+  - 《软件设计的哲学》和《代码整洁之道》作者的辩论
+  - 感觉 uncle bob 有点太偏激了
+- [The two factions of C++](https://herecomesthemoon.net/2024/11/two-factions-of-cpp/)
+  - C++ 作者 BS 喜欢强调「C++ 没有方言」
+  - 但在本文作者看来，C++ 没有方言的梦可能已经破灭了许多年
+  - 作者认为 C++ 领域中最明显的分野是：
+    - 相对现代、能力充足、将其代码作为资产的技术公司
+    - 其他人，更古老、更固执、更跟不上时代的用户
+  - BS 和 HS 很喜欢强调 C++ 数十年来的遗产，使得语言演化必须要最小化对已有部分的修改
+  - 但谷歌等公司（使用相对现代的 C++、拥有自动化工具和测试以及现代基础设施）的需求与（非常强烈的）向后兼容性愿望之间存在明显的脱节
+  - 所以，作者认为，至少在工具上，C++ 被分为了两个明显的阵营
+  - 原文挺精彩，这里的概括很不完全，建议阅读
+- [Type Inference in Rust and C++](https://herecomesthemoon.net/2025/01/type-inference-in-rust-and-cpp/)
+  - 对比 Rust 和 C++ 的类型推导，包括为什么二者发展为这样
+  - 当然免不了调侃一下 Swift 臭名昭著的极慢类型推导
+- [Are we observable yet? An introduction to Rust telemetry](https://www.lpalmieri.com/posts/2020-09-27-zero-to-production-4-are-we-observable-yet/)
+  - 虽然是比较久之前的文章（2020 年 9 月），但是也尚不算过时
+  - 介绍了可观察性的概念，从为什么到是什么到如何做
+  - 介绍了 Rust 中的相关 crate，带有丰富的示例
+  - 写得很好。作者的书《Zero To Production In Rust》也很不错
+- [Visitor Pattern Considered Pointless - Use Pattern Switches Instead](https://nipafx.dev/java-visitor-pattern-pointless/)
+  - 用现代 java 的 sealed interface 和模式匹配代替 visitor 模式
+  - 更简洁、更自然、更灵活、甚至可能性能更好
+  - 所以有人说设计模式是为了弥补语言缺陷
+- [Semantic Compression](https://caseymuratori.com/blog_0015)
+  - 作者表达了对面向对象思维的怀疑，提倡所谓语义压缩
+  - 大致可以认为是：不要先以对象思维、抽象思维编码，而是面向过程地编写后，再提炼精髓
+- [Rust, reflection and access rules](https://fractalfir.github.io/generated_html/refl_priv.html)
+  - 思考如果 Rust 有反射（无论是静态的还是动态的），它如何与访问规则交互
+  - 由于 Rust 是一个系统编程语言，它有一些额外的权衡
+  - 尤其是需要考虑到内存安全问题
 - [Parse, don’t validate](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/)
   - 提倡类型驱动设计的文章，非常值得一看
   - 尽管代码示例是用 haskell 写的，核心思想还是通用的
@@ -96,6 +132,9 @@
 
 ## 书籍教程
 
+- [Rust 异步运行时基础部件](https://toetoe55.github.io/async-rt-book/)
+  - 设计和实现简单的异步运行时
+  - 其实还是有点简陋的，但是查漏补缺也不错
 - [Crafting Interpreters](https://www.craftinginterpreters.com/contents.html)
   - 实践编译原理知识的绝佳好书，同时也是练习工程开发的很好材料
   - 真正地在教学工业界使用的技术，也会适当扩展各种语言实现的趣闻、语言设计的思考等
@@ -141,5 +180,5 @@
 ---
 
 > 作者: <no value>  
-> URL: http://cxz888.xyz/posts/tech/recommend_articles/  
+> URL: http://idlercloud.xyz/posts/tech/recommend_articles/  
 

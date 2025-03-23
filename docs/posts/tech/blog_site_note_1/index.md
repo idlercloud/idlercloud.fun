@@ -5,9 +5,9 @@
 
 <!--more-->
 
--   涉及内容：服务器、域名、域名解析、宝塔 Linux 面板、wordpress 的使用。
--   面向人群：纯新手，无基础。
--   前置知识：中文，部分英文。基础网络知识：如 IP 地址是什么，GB、Mbps 是什么单位。基础计算机知识：CPU、内存、硬盘空间是什么，能区分硬件和软件。
+- 涉及内容：服务器、域名、域名解析、宝塔 Linux 面板、wordpress 的使用。
+- 面向人群：纯新手，无基础。
+- 前置知识：中文，部分英文。基础网络知识：如 IP 地址是什么，GB、Mbps 是什么单位。基础计算机知识：CPU、内存、硬盘空间是什么，能区分硬件和软件。
 
 > 旧博客的建成，包括下述内容，有很大一部分是  [TriNitroTofu](https://tofu.icu/)  的功劳，大家有兴趣可以去看看。
 
@@ -89,7 +89,7 @@
 
 我只知道 GoDaddy 是老牌子，而 name.com 便宜些。后两个只是听说性价比不错。我个人选择的是 name.com，它的名气似乎不是很大，以至于中文互联网上没找到什么教程。我就假设你是用的 name.com 了，其他网站的操作也差不了多少。
 
-在购买域名之前，你需要先决定好网站的地址。顶级域名就那么些，你只能从中选，但是二级域名是由你决定的，如 `cxz888.xyz`。有些域名可能已经被人注册了，这时候可能你就只能换一个了，如果你实在很想要那个域名，那就得想办法联系拥有者商量了。
+在购买域名之前，你需要先决定好网站的地址。顶级域名就那么些，你只能从中选，但是二级域名是由你决定的，如 `idlercloud.fun`。有些域名可能已经被人注册了，这时候可能你就只能换一个了，如果你实在很想要那个域名，那就得想办法联系拥有者商量了。
 
 决定好域名，支付完成后，别着急，域名相关的东西还有下一个呢。
 
@@ -105,7 +105,7 @@
 
 购买好域名，进入后台，点进域名的界面。
 
-> 具体操作 (name.com)：右上角的用户图标下拉菜单点击 overview（概览），在下面找到自己的域名，如 `cxz888.xyz`，点进去。
+> 具体操作 (name.com)：右上角的用户图标下拉菜单点击 overview（概览），在下面找到自己的域名，如 `idlercloud.fun`，点进去。
 
 > 另外，name.com 的最下方是可以选择语言的。
 
@@ -186,11 +186,11 @@ Windows 下需要用到一个叫做 PuTTY 的软件。这是[官网下载地址]
 
 > 版权声明：本文采用 [CC BY 4.0](http://creativecommons.org/licenses/by/4.0/) 进行许可，转载请注明出处。
 >
-> 本文链接：[https://cxz888.xyz/posts/blog_site_note_1/](https://cxz888.xyz/posts/blog_site_note_1/)
+> 本文链接：[https://idlercloud.fun/posts/blog_site_note_1/](https://idlercloud.fun/posts/blog_site_note_1/)
 
 
 ---
 
 > 作者: <no value>  
-> URL: http://cxz888.xyz/posts/tech/blog_site_note_1/  
+> URL: http://idlercloud.xyz/posts/tech/blog_site_note_1/  
 

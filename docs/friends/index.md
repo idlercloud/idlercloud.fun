@@ -15,13 +15,13 @@
 ## 本站信息
 
 - 名称：闲云的博客
-- 网址：cxz888.xyz
-- logo：<https://cxz888.xyz/images/avatar.png>
+- 网址：idlercloud.fun
+- logo：<https://idlercloud.fun/images/avatar.png>
 - 描述：在互联网的小角落里，慢慢学习和生活
 
 
 ---
 
 > 作者: <no value>  
-> URL: http://cxz888.xyz/friends/  
+> URL: http://idlercloud.xyz/friends/  
 
