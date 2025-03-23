@@ -2,7 +2,7 @@
 title: " 数电实验验收，关于内卷"
 subtitle: ""
 date: 2022-08-11T21:48:06+08:00
-draft: false
+draft: true
 author: "idlercloud"
 authorLink: "https://idlercloud.fun"
 authorEmail: "idlercloud@gmail.com"

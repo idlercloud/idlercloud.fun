@@ -2,7 +2,7 @@
 title: "迁移说明"
 subtitle: ""
 date: 2022-08-12T22:40:19+08:00
-draft: false
+draft: true
 author: "idlercloud"
 authorLink: "https://idlercloud.fun"
 authorEmail: "idlercloud@gmail.com"
