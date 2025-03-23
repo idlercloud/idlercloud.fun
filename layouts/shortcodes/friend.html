@@ -1,13 +1,15 @@
 {{ if .IsNamedParams }}
-<a target="_blank" href={{ .Get "url" }} title={{ .Get "name" }} class="friend-url">
-    <div class="friend-div">
-        <div class="friend-div-left">
-            <img class="friend-avatar" src={{ .Get "logo" }} />
+<div class="friend-card">
+    <a target="_blank" href={{ .Get "url" }} title={{ .Get "name" }} class="friend-url">
+        <div class="friend-div">
+            <div class="friend-div-left">
+                <img class="friend-avatar" src={{ .Get "logo" }} />
+            </div>
+            <div class="friend-div-right">
+                <div class="friend-name">{{ .Get "name" }}</div>
+                <div class="friend-info">{{ .Get "word" }}</div>
+            </div>
         </div>
-        <div class="friend-div-right">
-            <div class="friend-name">{{ .Get "name" }}</div>
-            <div class="friend-info">{{ .Get "word" }}</div>
-        </div>
-    </div>
-</a>
+    </a>
+</div>
 {{ end }}
