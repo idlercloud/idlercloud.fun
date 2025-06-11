@@ -216,6 +216,47 @@
 <h2 id="精品文章">精品文章</h2>
 <ul>
 <li><a
+  href="https://typesanitizer.com/blog/zig-generics.html"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>Zig-style generics are not well-suited for most languages</a>
+<ul>
+<li>zig 是一个有趣的语言，其 comptime 特性强大而优雅</li>
+<li>许多 zig 爱好者喜欢在各个平台声称 zig 的泛型实现是完美的</li>
+<li>而作者认为并非如此，zig 的方案并不适合所有语言，自有其缺陷所在</li>
+<li>因为 zig 的泛型模型和 C++ 的模板很像，所以大部分 C++ 模板的缺陷也都存在</li>
+</ul>
+</li>
+<li><a
+  href="https://brevzin.github.io/c&#43;&#43;/2025/03/25/attributes/"
+  
+  
+    
+    
+    target="_blank"
+  
+  
+    rel="external nofollow noopener noreferrer"
+  
+  
+  
+>On the Ignorability of Attributes</a>
+<ul>
+<li>C++ 中有一个广泛的观点是，标准属性应当是可以忽略的</li>
+<li>作者认为，语言中有很多本来可以是属性而非关键字的特性，比如 override</li>
+<li>然而因为属性是可忽略的，很多事情都做不到，这使得属性位于一个尴尬的位置</li>
+</ul>
+</li>
+<li><a
   href="https://www.sminez.dev/socrates-is-a-state-machine/#sans-i-o-oh-c-est-le-but"
   
   
