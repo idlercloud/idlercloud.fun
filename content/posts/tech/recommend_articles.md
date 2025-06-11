@@ -93,6 +93,15 @@ repost:
 
 ## 精品文章
 
+- [Zig-style generics are not well-suited for most languages](https://typesanitizer.com/blog/zig-generics.html)
+  - zig 是一个有趣的语言，其 comptime 特性强大而优雅
+  - 许多 zig 爱好者喜欢在各个平台声称 zig 的泛型实现是完美的
+  - 而作者认为并非如此，zig 的方案并不适合所有语言，自有其缺陷所在
+  - 因为 zig 的泛型模型和 C++ 的模板很像，所以大部分 C++ 模板的缺陷也都存在
+- [On the Ignorability of Attributes](https://brevzin.github.io/c++/2025/03/25/attributes/)
+  - C++ 中有一个广泛的观点是，标准属性应当是可以忽略的
+  - 作者认为，语言中有很多本来可以是属性而非关键字的特性，比如 override
+  - 然而因为属性是可忽略的，很多事情都做不到，这使得属性位于一个尴尬的位置
 - [Socrates is a state machine](https://www.sminez.dev/socrates-is-a-state-machine/#sans-i-o-oh-c-est-le-but)
   - 很有趣，滥用 Rust async/await 生成状态机，从而在 stable rust 模拟 generator
 - [Take a break: Rust match has fallthrough](https://huonw.github.io/blog/2025/03/rust-fallthrough/)
